@@ -6,9 +6,17 @@
   "main": "./src/index.ts",
   "module": "./src/index.ts",
   "types": "./src/index.ts",
+  "imports": {
+    "#components/*": "./src/components/*.tsx",
+    "#hooks/*": "./src/hooks/*.ts",
+    "#lib/*": "./src/lib/*.ts"
+  },
   "exports": {
     ".": "./src/index.ts",
-    "./components/button": "./src/components/button.tsx"
+    "./components/*": "./src/components/*.tsx",
+    "./components/button": "./src/components/button.tsx",
+    "./lib/*": "./src/lib/*.ts",
+    "./lib/utils": "./src/lib/utils.ts"
   },
   "peerDependencies": {
     "react": "^19.0.0",

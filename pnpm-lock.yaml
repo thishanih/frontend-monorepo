@@ -216,6 +216,9 @@ importers:
 
   apps/admin:
     dependencies:
+      '@my-monorepo/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       react:
         specifier: ^19.2.7
         version: 19.2.8
@@ -262,6 +265,9 @@ importers:
 
   apps/customer:
     dependencies:
+      '@my-monorepo/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       react:
         specifier: ^19.2.7
         version: 19.2.8

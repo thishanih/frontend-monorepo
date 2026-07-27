@@ -10,11 +10,12 @@
     "cssVariables": true,
     "prefix": ""
   },
+  "iconLibrary": "lucide",
   "aliases": {
     "components": "#components",
     "hooks": "#hooks",
     "lib": "#lib",
-    "ui": "#components",
-    "utils": "#lib/utils"
+    "ui": "@my-monorepo/ui/components",
+    "utils": "@my-monorepo/ui/lib/utils"
   }
 }
