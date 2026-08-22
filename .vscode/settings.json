@@ -1,0 +1,5 @@
+{
+  "tailwindCSS.experimental.configFile": {
+    "packages/design-system/src/styles.css": "apps/admin/src/**/*"
+  }
+}

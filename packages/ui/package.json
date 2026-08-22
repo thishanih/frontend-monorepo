@@ -29,7 +29,8 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@my-monorepo/design-system": "workspace:*"
+    "@my-monorepo/design-system": "workspace:*",
+    "@radix-ui/react-label": "^2.1.15"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.12",

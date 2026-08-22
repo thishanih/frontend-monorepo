@@ -14,8 +14,25 @@ A Turborepo + pnpm workspace with multiple frontend apps and shared packages.
 my-monorepo/
 ├─ apps/
 │  ├─ admin/
+│  │  ├─ public/
+│  │  ├─ src/
+│  │  │  ├─ assets/
+│  │  │  ├─ components/
+│  │  │  ├─ lib/
+│  │  │  ├─ views/
+│  │  │  ├─ App.css
+│  │  │  ├─ App.tsx
+│  │  │  ├─ index.css
+│  │  │  └─ main.tsx
+│  │  ├─ components.json
+│  │  ├─ package.json
+│  │  └─ vite.config.ts
 │  └─ customer/
 ├─ packages/
+│  ├─ api-client/
+│  │  ├─ client.ts
+│  │  ├─ package.json
+│  │  └─ services/
 │  ├─ ui/
 │  │  ├─ components.json
 │  │  ├─ package.json
@@ -43,10 +60,11 @@ my-monorepo/
 │  │  ├─ package.json
 │  │  └─ vitest.config.ts
 │  ├─ types/
+│  │  └─ auth.interface.ts
 │  └─ utils/
 │     ├─ package.json
 │     └─ src/
-│        ├─ cn.ts
+│        ├─ cookies.ts
 │        └─ index.ts
 ├─ package.json
 ├─ pnpm-workspace.yaml
@@ -64,8 +82,19 @@ my-monorepo/
 - packages/eslint-config: Shared ESLint flat configuration
 - packages/typescript-config: Shared TypeScript compiler configurations
 - packages/test-config: Shared Vitest configuration for future tests
-- packages/types: Shared TypeScript types (currently empty)
-- packages/utils: Shared utilities
+- packages/api-client: Shared API client and service modules
+- packages/types: Shared TypeScript interfaces and types
+- packages/utils: Shared utility modules, including cookie helpers
+
+## Admin App Libraries
+
+The admin app includes the following frontend libraries:
+
+- `react-hook-form`: Form state and submission handling
+- `@tanstack/react-query`: Server state and data fetching
+- `zustand`: Lightweight client state management
+- `yup`: Schema validation
+- `react-hot-toast`: Toast notifications
 
 ## Tailwind CSS
 
