@@ -16,10 +16,12 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
+    "@my-monorepo/api-client": "workspace:*",
     "@my-monorepo/design-system": "workspace:*",
     "@my-monorepo/eslint-config": "workspace:*",
     "@my-monorepo/typescript-config": "workspace:*",
     "@my-monorepo/ui": "workspace:*",
+    "@my-monorepo/utils": "workspace:*",
     "@tanstack/react-query": "^5.101.4",
     "lucide-react": "^1.33.0",
     "react": "^19.2.7",

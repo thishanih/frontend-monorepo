@@ -219,6 +219,9 @@ importers:
       '@hookform/resolvers':
         specifier: ^5.9.1
         version: 5.9.1(react-hook-form@7.85.0(react@19.2.8))(yup@1.7.1)(zod@4.4.3)
+      '@my-monorepo/api-client':
+        specifier: workspace:*
+        version: link:../../packages/api-client
       '@my-monorepo/design-system':
         specifier: workspace:*
         version: link:../../packages/design-system
@@ -231,6 +234,9 @@ importers:
       '@my-monorepo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@my-monorepo/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       '@tanstack/react-query':
         specifier: ^5.101.4
         version: 5.101.4(react@19.2.8)
