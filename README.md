@@ -32,6 +32,16 @@ my-monorepo/
 │  ├─ config-tailwind/
 │  │  ├─ package.json
 │  │  └─ tailwind.config.js
+│  ├─ eslint-config/
+│  │  ├─ package.json
+│  │  └─ index.js
+│  ├─ typescript-config/
+│  │  ├─ base.json
+│  │  ├─ package.json
+│  │  └─ vite.json
+│  ├─ test-config/
+│  │  ├─ package.json
+│  │  └─ vitest.config.ts
 │  ├─ types/
 │  └─ utils/
 │     ├─ package.json
@@ -51,6 +61,9 @@ my-monorepo/
 - packages/ui: Shared UI components and compiled Tailwind styles
 - packages/design-system: Shared Tailwind v4 theme tokens and compiled styles
 - packages/config-tailwind: Minimal Tailwind configuration package
+- packages/eslint-config: Shared ESLint flat configuration
+- packages/typescript-config: Shared TypeScript compiler configurations
+- packages/test-config: Shared Vitest configuration for future tests
 - packages/types: Shared TypeScript types (currently empty)
 - packages/utils: Shared utilities
 

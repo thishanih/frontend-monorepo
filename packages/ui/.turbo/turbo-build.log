@@ -1,4 +1,4 @@
 [2m$ tailwindcss -i ./src/styles.css -o ./dist/styles.css[22m
 [3m[1m[34m≈[39m[22m[23m tailwindcss [34mv4.3.3[39m
 
-Done in [32m23ms[39m
+Done in [32m17ms[39m
