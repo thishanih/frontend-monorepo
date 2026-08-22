@@ -1,82 +1,107 @@
-import axios, {
-  type AxiosInstance,
-  type AxiosRequestConfig,
-  isAxiosError,
-} from "axios";
+/**
+ * Axios Instance Configuration
+ *
+ * This module creates and configures a centralized Axios instance for API communication
+ * with automatic token management and refresh capabilities.
+ *
+ * Features:
+ * - Automatic JWT token injection in request headers
+ * - Token refresh on 401 unauthorized responses
+ * - Cookie-based token storage and management
+ * - Automatic logout on token refresh failure
+ */
 
-export class ApiError extends Error {
-  readonly status: number;
-  readonly body: unknown;
+import axios, { AxiosInstance, AxiosResponse } from "axios";
+import { GetCookie, RemoveCookie, SetCookie } from "@my-monorepo/utils";
+import { RefreshToken } from "./services/auth.service";
 
-  constructor(status: number, body: unknown) {
-    super(`API request failed with status ${status}`);
-    this.name = "ApiError";
-    this.status = status;
-    this.body = body;
-  }
-}
+const ACCESS_TOKEN = "accessToken";
+const REFRESH_TOKEN = "refreshToken";
 
-export type ApiClientOptions = {
-  baseUrl: string;
-  headers?: HeadersInit;
-  getAccessToken?: () => string | null | undefined;
-  onUnauthorized?: () => void;
-};
+// Token refresh state management
+let isRefreshing = false;
+let failedRequestsQueue: Array<(token: string) => void> = [];
 
-function toAxiosHeaders(headers?: HeadersInit): Record<string, string> {
-  const normalized = new Headers(headers);
-  return Object.fromEntries(normalized.entries());
-}
+const axiosInstance: AxiosInstance = axios.create({
+  baseURL: "http://localhost:3000/api", // Replace with your API base URL
+  headers: {
+    "Content-Type": "application/json", // Default content type for JSON APIs
+  },
+});
 
-export class ApiClient {
-  readonly http: AxiosInstance;
+axiosInstance.interceptors.request.use(
+  async (config) => {
+    const accessToken = GetCookie(ACCESS_TOKEN);
+    if (accessToken) {
+      config.headers["Authorization"] = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
 
-  constructor(options: ApiClientOptions) {
-    this.http = axios.create({
-      baseURL: options.baseUrl.replace(/\/$/, ""),
-      headers: toAxiosHeaders(options.headers),
-    });
+axiosInstance.interceptors.response.use(
+  async (response: AxiosResponse) => {
+    return response;
+  },
+  async (err) => {
+    const originalConfig = err.config;
 
-    this.http.interceptors.request.use((config) => {
-      const token = options.getAccessToken?.();
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+    // Check if error is due to authentication and not already retried
+    if (
+      (err.response?.status === 401 || err.response?.status === 403) &&
+      !originalConfig._retry
+    ) {
+      // If already refreshing, queue this request
+      if (isRefreshing) {
+        return new Promise((resolve) => {
+          failedRequestsQueue.push((token: string) => {
+            originalConfig.headers["Authorization"] = `Bearer ${token}`;
+            resolve(axiosInstance(originalConfig));
+          });
+        });
       }
-      if (config.data !== undefined && !config.headers["Content-Type"]) {
-        config.headers["Content-Type"] = "application/json";
-      }
-      return config;
-    });
 
-    this.http.interceptors.response.use(
-      (response) => response,
-      (error: unknown) => {
-        if (!isAxiosError(error)) {
-          throw error;
+      originalConfig._retry = true;
+      isRefreshing = true;
+
+      try {
+        const getRefreshToken = GetCookie(REFRESH_TOKEN);
+
+        if (!getRefreshToken) {
+          throw new Error("No refresh token available");
         }
 
-        if (error.response?.status === 401) {
-          options.onUnauthorized?.();
-        }
+        const res = await RefreshToken(getRefreshToken);
 
-        throw new ApiError(error.response?.status ?? 0, error.response?.data);
-      },
-    );
-  }
+        // Update the access token in cookies
+        SetCookie(ACCESS_TOKEN, res.data.token);
+        SetCookie(REFRESH_TOKEN, res.data.refreshToken);
 
-  async request<T>(path: string, init: RequestInit = {}): Promise<T> {
-    const config: AxiosRequestConfig = {
-      url: path,
-      method: init.method,
-      headers: toAxiosHeaders(init.headers),
-      data: init.body,
-    };
+        // Update the authorization header for the original request
+        originalConfig.headers["Authorization"] = `Bearer ${res.data.token}`;
 
-    const response = await this.http.request<T>(config);
-    return response.data;
-  }
-}
+        // Process all queued requests with the new token
+        failedRequestsQueue.forEach((callback) => callback(res.data.token));
+        failedRequestsQueue = [];
 
-export function createApiClient(baseUrl: string): ApiClient {
-  return new ApiClient({ baseUrl });
-}
+        return axiosInstance(originalConfig);
+      } catch (_error: any) {
+        // Clear queue on refresh failure
+        failedRequestsQueue = [];
+
+        // Clear tokens and redirect to login
+        RemoveCookie(ACCESS_TOKEN);
+        RemoveCookie(REFRESH_TOKEN);
+        window.location.href = "/"; // Redirect to login page
+
+        return Promise.reject(_error);
+      } finally {
+        isRefreshing = false;
+      }
+    }
+  },
+);
+export default axiosInstance;

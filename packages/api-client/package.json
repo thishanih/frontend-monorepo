@@ -11,6 +11,7 @@
     "./services/auth.service": "./services/auth.service.ts"
   },
   "dependencies": {
+    "@my-monorepo/utils": "workspace:*",
     "axios": "^1.19.0"
   }
 }

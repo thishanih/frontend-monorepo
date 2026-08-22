@@ -8,5 +8,13 @@
   "exports": {
     ".": "./src/index.ts",
     "./cn": "./src/cn.ts"
+  },
+  "dependencies": {
+    "js-cookie": "^3.0.8",
+    "jwt-decode": "^4.0.0",
+    "moment": "^2.30.1"
+  },
+  "devDependencies": {
+    "@types/js-cookie": "^3.0.6"
   }
 }

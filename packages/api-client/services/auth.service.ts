@@ -1,36 +1,53 @@
-import type { ApiClient } from "../client";
+import axios, { AxiosInstance } from "axios";
+import {
+  LoginPayload,
+  LoginRes,
+  ForgotPasswordPayload,
+  ResetPasswordPayload,
+  UserVerificationPayload,
+  RefreshTokenRes,
+  validateTokenRes,
+} from "../../types/auth.interface";
 
-export type LoginRequest = {
-  email: string;
-  password: string;
+const axiosInstance: AxiosInstance = axios.create({
+  baseURL: "http://localhost:3000/api", // Replace with your API base URL
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+export const Login = async (payload: LoginPayload) => {
+  const res = await axiosInstance.post<LoginRes>(`/user/login`, payload);
+  return res;
 };
 
-export type AuthUser = {
-  id: string;
-  email: string;
-  name?: string;
+export const ForgetPassword = async (payload: ForgotPasswordPayload) => {
+  const res = await axiosInstance.post(`/auth/forgot-password`, payload);
+  return res;
 };
 
-export type AuthResponse = {
-  accessToken: string;
-  user: AuthUser;
+export const VerificationAuth = async (payload: UserVerificationPayload) => {
+  const res = await axiosInstance.post(`/roles/respond/`, payload);
+  return res;
 };
 
-export class AuthService {
-  constructor(private readonly client: ApiClient) {}
+export const ResetPassword = async (resetPayload: ResetPasswordPayload) => {
+  const res = await axiosInstance.post(`/auth/reset-password`, resetPayload);
+  return res;
+};
 
-  login(credentials: LoginRequest): Promise<AuthResponse> {
-    return this.client.request<AuthResponse>("/auth/login", {
-      method: "POST",
-      body: JSON.stringify(credentials),
-    });
-  }
+export const RefreshToken = async (refresh_token: string) => {
+  const res = await axiosInstance.get<RefreshTokenRes>(`/user/refresh-token`, {
+    headers: {
+      Authorization: `Bearer ${refresh_token}`,
+    },
+  });
+  return res;
+};
 
-  logout(): Promise<void> {
-    return this.client.request<void>("/auth/logout", { method: "POST" });
-  }
-
-  me(): Promise<AuthUser> {
-    return this.client.request<AuthUser>("/auth/me");
-  }
-}
+export const VerificationToken = async (token: string) => {
+  const res = await axiosInstance.get<validateTokenRes>(
+    `/auth/validatetoken/${token}`,
+  );
+  return res;
+};
