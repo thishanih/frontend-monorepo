@@ -18,5 +18,23 @@ export default defineConfig([
     languageOptions: {
       globals: globals.browser,
     },
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@my-monorepo/*/src/**", "@my-monorepo/*/dist/**"],
+              message:
+                "Import workspace packages through their public exports.",
+            },
+            {
+              group: ["apps/**"],
+              message: "Apps cannot be imported as dependencies.",
+            },
+          ],
+        },
+      ],
+    },
   },
 ]);

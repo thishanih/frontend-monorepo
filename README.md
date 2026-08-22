@@ -80,6 +80,19 @@ Build the shared styles and apps with:
 pnpm build
 ```
 
+## Environment
+
+Browser-exposed variables use the `VITE_` prefix. Copy `.env.example` to an
+app's `.env` file and set the values for local development. Turbo tracks
+`VITE_API_URL` when caching builds so changes cannot reuse an incompatible
+result.
+
+## Dependency Boundaries
+
+Workspace packages must be imported through their package exports. Imports from
+another package's `src` or `dist` directory, and imports from `apps`, are
+reported by the shared ESLint configuration.
+
 ## Prerequisites
 
 - Node.js 22+
