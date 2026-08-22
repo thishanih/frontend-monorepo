@@ -13,6 +13,7 @@
   },
   "exports": {
     ".": "./src/index.ts",
+    "./styles.css": "./dist/styles.css",
     "./components/*": "./src/components/*.tsx",
     "./components/button": "./src/components/button.tsx",
     "./lib/*": "./src/lib/*.ts",
@@ -21,5 +22,17 @@
   "peerDependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
+  },
+  "scripts": {
+    "build": "tailwindcss -i ./src/styles.css -o ./dist/styles.css",
+    "dev": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@my-monorepo/design-system": "workspace:*"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.12",
+    "tailwindcss": "^4.1.12"
   }
 }

@@ -22,9 +22,22 @@ my-monorepo/
 │  │  └─ src/
 │  │     ├─ components/
 │  │     │  └─ button.tsx
+│  │     ├─ styles.css
 │  │     └─ index.ts
+│  ├─ design-system/
+│  │  ├─ package.json
+│  │  └─ src/
+│  │     ├─ styles.css
+│  │     └─ theme.css
+│  ├─ config-tailwind/
+│  │  ├─ package.json
+│  │  └─ tailwind.config.js
 │  ├─ types/
 │  └─ utils/
+│     ├─ package.json
+│     └─ src/
+│        ├─ cn.ts
+│        └─ index.ts
 ├─ package.json
 ├─ pnpm-workspace.yaml
 ├─ turbo.json
@@ -35,9 +48,24 @@ my-monorepo/
 
 - apps/admin: Admin frontend app
 - apps/customer: Customer frontend app
-- packages/ui: Shared UI components package
+- packages/ui: Shared UI components and compiled Tailwind styles
+- packages/design-system: Shared Tailwind v4 theme tokens and compiled styles
+- packages/config-tailwind: Minimal Tailwind configuration package
 - packages/types: Shared TypeScript types (currently empty)
-- packages/utils: Shared utilities (currently empty)
+- packages/utils: Shared utilities
+
+## Tailwind CSS
+
+Tailwind v4 tokens are defined in `packages/design-system/src/theme.css`. The
+design-system and UI packages compile their CSS with the Tailwind CLI and
+export the resulting `dist/styles.css`. Both Vite apps import those package
+styles from `src/main.tsx`.
+
+Build the shared styles and apps with:
+
+```bash
+pnpm build
+```
 
 ## Prerequisites
 
