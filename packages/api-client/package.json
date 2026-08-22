@@ -1,0 +1,16 @@
+{
+  "name": "@my-monorepo/api-client",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./client.ts",
+  "types": "./client.ts",
+  "exports": {
+    ".": "./client.ts",
+    "./client": "./client.ts",
+    "./services/auth.service": "./services/auth.service.ts"
+  },
+  "dependencies": {
+    "axios": "^1.19.0"
+  }
+}
