@@ -1,1 +1,1 @@
-export { GetCookie, RemoveCookie, SetCookie } from "./cookies";
+export { GetCookie, RemoveCookie, SetCookie } from './cookies';

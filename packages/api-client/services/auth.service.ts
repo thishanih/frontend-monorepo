@@ -1,5 +1,5 @@
-import axios from "axios";
-import type { AxiosInstance } from "axios";
+import axios from 'axios';
+import type { AxiosInstance } from 'axios';
 import type {
   LoginPayload,
   LoginRes,
@@ -8,12 +8,12 @@ import type {
   UserVerificationPayload,
   RefreshTokenRes,
   validateTokenRes,
-} from "../../types/auth.interface";
+} from '../../types/auth.interface';
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: "http://localhost:3000/api", // Replace with your API base URL
+  baseURL: 'http://localhost:3000/api', // Replace with your API base URL
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 });
 
@@ -47,8 +47,6 @@ export const RefreshToken = async (refresh_token: string) => {
 };
 
 export const VerificationToken = async (token: string) => {
-  const res = await axiosInstance.get<validateTokenRes>(
-    `/auth/validatetoken/${token}`,
-  );
+  const res = await axiosInstance.get<validateTokenRes>(`/auth/validatetoken/${token}`);
   return res;
 };

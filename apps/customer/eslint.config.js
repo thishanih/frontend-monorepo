@@ -1,1 +1,1 @@
-export { default } from "@my-monorepo/eslint-config";
+export { default } from '@my-monorepo/eslint-config';

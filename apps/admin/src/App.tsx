@@ -1,8 +1,8 @@
-import { Fragment, Suspense, lazy } from "react";
-import { Routes, Route } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
+import { Fragment, Suspense, lazy } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 
-const Login = lazy(() => import("./views/auth/views/Login"));
+const Login = lazy(() => import('./views/auth/views/Login'));
 
 function App() {
   return (
