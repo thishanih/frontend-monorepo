@@ -1,20 +1,15 @@
 export interface LoginPayload {
-  username: string;
+  email: string;
   password: string;
 }
 
-export interface LoginRes {
-  token: string;
-  refresh_token: string;
-  token_life_seconds: number;
-  result: LoginResult;
-  is_success: boolean;
-}
-
-export interface LoginResult {
-  username: string;
-  party_id: number;
-  status: string;
+export interface LoginResponseData {
+  userid: string;
+  userName: string;
+  userType: string;
+  userStatus: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 export interface ForgotPasswordPayload {

@@ -11,19 +11,25 @@
  * - Automatic logout on token refresh failure
  */
 
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { GetCookie, RemoveCookie, SetCookie } from '@my-monorepo/utils';
-import { RefreshToken } from './services/auth.service';
+import axios from 'axios';
+import type { AxiosInstance, AxiosResponse } from 'axios';
+import {
+  ACCESS_TOKEN,
+  API_BASE_URL,
+  GetCookie,
+  REFRESH_TOKEN,
+  RemoveCookie,
+  SetCookie,
+} from '@my-monorepo/utils';
 
-const ACCESS_TOKEN = 'accessToken';
-const REFRESH_TOKEN = 'refreshToken';
+import { RefreshTokenApi } from './services/auth.service';
 
 // Token refresh state management
 let isRefreshing = false;
 let failedRequestsQueue: Array<(token: string) => void> = [];
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: 'http://localhost:3000/api', // Replace with your API base URL
+  baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json', // Default content type for JSON APIs
   },
@@ -71,17 +77,18 @@ axiosInstance.interceptors.response.use(
           throw new Error('No refresh token available');
         }
 
-        const res = await RefreshToken(getRefreshToken);
+        // Refresh the token using the API
+        const res = await RefreshTokenApi(getRefreshToken);
 
         // Update the access token in cookies
-        SetCookie(ACCESS_TOKEN, res.data.token);
-        SetCookie(REFRESH_TOKEN, res.data.refreshToken);
+        SetCookie(ACCESS_TOKEN, res.data.data.token);
+        SetCookie(REFRESH_TOKEN, res.data.data.refreshToken);
 
         // Update the authorization header for the original request
-        originalConfig.headers['Authorization'] = `Bearer ${res.data.token}`;
+        originalConfig.headers['Authorization'] = `Bearer ${res.data.data.token}`;
 
         // Process all queued requests with the new token
-        failedRequestsQueue.forEach((callback) => callback(res.data.token));
+        failedRequestsQueue.forEach((callback) => callback(res.data.data.token));
         failedRequestsQueue = [];
 
         return axiosInstance(originalConfig);

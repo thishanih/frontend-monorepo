@@ -7,8 +7,8 @@ import { Eye, EyeOff, LoaderCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { Button, Input, Label } from '@my-monorepo/ui';
-import { Login as login } from '@my-monorepo/api-client/services/auth.service';
-import { SetCookie } from '@my-monorepo/utils';
+import { LoginApi } from '@my-monorepo/api-client/services/auth.service';
+import { ACCESS_TOKEN, REFRESH_TOKEN, SetCookie } from '@my-monorepo/utils';
 import { LoginImageCarousel } from '../components/LoginImageCarousel';
 
 const loginSchema = yup.object({
@@ -34,10 +34,10 @@ export default function Login() {
   });
 
   const loginMutation = useMutation({
-    mutationFn: login,
+    mutationFn: LoginApi,
     onSuccess: ({ data }) => {
-      SetCookie('accessToken', data.token);
-      SetCookie('refreshToken', data.refresh_token);
+      SetCookie(ACCESS_TOKEN, data.data.accessToken);
+      SetCookie(REFRESH_TOKEN, data.data.refreshToken);
       toast.success('Login successful');
       navigate('/dashboard');
     },
@@ -47,7 +47,7 @@ export default function Login() {
   });
 
   const onSubmit = (values: LoginFormValues) =>
-    loginMutation.mutate({ username: values.email, password: values.password });
+    loginMutation.mutate({ email: values.email, password: values.password });
 
   return (
     <div className="flex h-screen w-full items-center justify-center">

@@ -1,44 +1,37 @@
-import axios from 'axios';
-import type { AxiosInstance } from 'axios';
 import type {
   LoginPayload,
-  LoginRes,
+  LoginResponseData,
   ForgotPasswordPayload,
   ResetPasswordPayload,
   UserVerificationPayload,
   RefreshTokenRes,
   validateTokenRes,
 } from '../../types/auth.interface';
+import axiosInstance from '../client';
+import type { ApiResponse } from '../../types/common.interface';
 
-const axiosInstance: AxiosInstance = axios.create({
-  baseURL: 'http://localhost:3000/api', // Replace with your API base URL
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-export const Login = async (payload: LoginPayload) => {
-  const res = await axiosInstance.post<LoginRes>(`/user/login`, payload);
+export const LoginApi = async (payload: LoginPayload) => {
+  const res = await axiosInstance.post<ApiResponse<LoginResponseData>>(`/user/login`, payload);
   return res;
 };
 
-export const ForgetPassword = async (payload: ForgotPasswordPayload) => {
-  const res = await axiosInstance.post(`/auth/forgot-password`, payload);
+export const ForgotPasswordApi = async (payload: ForgotPasswordPayload) => {
+  const res = await axiosInstance.post<ApiResponse<null>>(`/auth/forgot-password`, payload);
   return res;
 };
 
-export const VerificationAuth = async (payload: UserVerificationPayload) => {
-  const res = await axiosInstance.post(`/roles/respond/`, payload);
+export const VerificationAuthApi = async (payload: UserVerificationPayload) => {
+  const res = await axiosInstance.post<ApiResponse<null>>(`/roles/respond/`, payload);
   return res;
 };
 
-export const ResetPassword = async (resetPayload: ResetPasswordPayload) => {
-  const res = await axiosInstance.post(`/auth/reset-password`, resetPayload);
+export const ResetPasswordApi = async (resetPayload: ResetPasswordPayload) => {
+  const res = await axiosInstance.post<ApiResponse<null>>(`/auth/reset-password`, resetPayload);
   return res;
 };
 
-export const RefreshToken = async (refresh_token: string) => {
-  const res = await axiosInstance.get<RefreshTokenRes>(`/user/refresh-token`, {
+export const RefreshTokenApi = async (refresh_token: string) => {
+  const res = await axiosInstance.get<ApiResponse<RefreshTokenRes>>(`/user/refresh-token`, {
     headers: {
       Authorization: `Bearer ${refresh_token}`,
     },
@@ -46,7 +39,9 @@ export const RefreshToken = async (refresh_token: string) => {
   return res;
 };
 
-export const VerificationToken = async (token: string) => {
-  const res = await axiosInstance.get<validateTokenRes>(`/auth/validatetoken/${token}`);
+export const VerificationTokenApi = async (token: string) => {
+  const res = await axiosInstance.get<ApiResponse<validateTokenRes>>(
+    `/auth/validatetoken/${token}`,
+  );
   return res;
 };

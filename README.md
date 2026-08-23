@@ -111,10 +111,32 @@ pnpm build
 
 ## Environment
 
-Browser-exposed variables use the `VITE_` prefix. Copy `.env.example` to an
-app's `.env` file and set the values for local development. Turbo tracks
-`VITE_API_URL` when caching builds so changes cannot reuse an incompatible
-result.
+Browser-exposed variables use the `VITE_` prefix. Each app loads environment
+variables from its own directory. Copy the example file before starting an
+app:
+
+```bash
+cp apps/admin/.env.example apps/admin/.env
+cp apps/customer/.env.example apps/customer/.env
+```
+
+Available variables:
+
+- `VITE_API_URL`: API server origin. `/api` is appended automatically.
+- `VITE_COOKIE_DOMAIN`: Optional cookie domain. Leave empty for localhost.
+- `VITE_COOKIE_SECURE`: Set to `true` when serving over HTTPS; use `false` for
+  local HTTP development.
+
+For example:
+
+```env
+VITE_API_URL=http://localhost:3000
+VITE_COOKIE_DOMAIN=
+VITE_COOKIE_SECURE=false
+```
+
+Restart Vite after changing an `.env` file. Turbo tracks `VITE_API_URL` when
+caching builds so changes cannot reuse an incompatible result.
 
 ## Dependency Boundaries
 

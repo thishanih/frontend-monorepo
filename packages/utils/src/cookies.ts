@@ -1,8 +1,7 @@
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import moment from 'moment';
-
-const cookieDomain = 'localhost';
+import { COOKIE_DOMAIN, COOKIE_SECURE } from './config';
 
 interface TokenPayload {
   sub: string;
@@ -12,12 +11,7 @@ interface TokenPayload {
 
 export const GetCookie = (name: string) => {
   try {
-    const getToken = Cookies.get(name);
-    if (getToken) {
-      const tokenObj = JSON.parse(getToken);
-      return tokenObj;
-    }
-    return null;
+    return Cookies.get(name) ?? null;
   } catch (error) {
     console.error(`Error retrieving cookie '${name}':`, error);
     throw error;
@@ -31,9 +25,9 @@ export const SetCookie = (name: string, secureKey: string) => {
     }
     const tokenInfo: TokenPayload = jwtDecode(secureKey);
     Cookies.set(name, secureKey, {
-      expires: moment().add(Number(tokenInfo.exp), 'seconds').toDate(),
-      secure: true,
-      domain: cookieDomain,
+      expires: moment.unix(tokenInfo.exp).toDate(),
+      secure: COOKIE_SECURE,
+      ...(COOKIE_DOMAIN ? { domain: COOKIE_DOMAIN } : {}),
       sameSite: 'strict',
       path: '/',
     });
@@ -45,11 +39,8 @@ export const SetCookie = (name: string, secureKey: string) => {
 
 export const RemoveCookie = (name: string) => {
   try {
-    Cookies.set(name, '', {
-      expires: moment().add(Number(0), 'seconds').toDate(),
-      secure: true,
-      domain: cookieDomain,
-      sameSite: 'strict',
+    Cookies.remove(name, {
+      ...(COOKIE_DOMAIN ? { domain: COOKIE_DOMAIN } : {}),
       path: '/',
     });
   } catch (error) {
