@@ -3,12 +3,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import * as yup from 'yup';
-import { ArrowLeft, ArrowRight, Eye, EyeOff, LoaderCircle } from 'lucide-react';
+import { Eye, EyeOff, LoaderCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { Button, Input, Label } from '@my-monorepo/ui';
 import { Login as login } from '@my-monorepo/api-client/services/auth.service';
 import { SetCookie } from '@my-monorepo/utils';
+import { LoginImageCarousel } from '../components/LoginImageCarousel';
 
 const loginSchema = yup.object({
   email: yup.string().email('Enter a valid email').required('Email is required'),
@@ -68,9 +69,9 @@ export default function Login() {
               Enter your details to access your account.
             </p>
 
-            <form className="flex-col gap-y-4" onSubmit={handleSubmit(onSubmit)}>
+            <form className="flex flex-col gap-y-4" onSubmit={handleSubmit(onSubmit)}>
               <div>
-                <Label htmlFor="email" className="mb-1.5">
+                <Label htmlFor="email" className="mb-1.5 text-sm">
                   Email
                 </Label>
                 <Input
@@ -88,7 +89,7 @@ export default function Login() {
               </div>
 
               <div>
-                <Label htmlFor="password" className="mb-1.5">
+                <Label htmlFor="password" className="mb-1.5 text-sm">
                   Password
                 </Label>
                 <div className="relative">
@@ -149,56 +150,9 @@ export default function Login() {
           </div>
         </div>
 
-        {/* Right: image panel with a scalloped cutout on the left side */}
-        <div className="relative w-full overflow-hidden bg-neutral-200 md:min-h-0 md:w-1/2">
-          <img
-            src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&h=1400&fit=crop&auto=format"
-            alt="Team members collaborating around a laptop in a bright workspace"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-          <div className="bg-linear-to-t absolute inset-0 from-black/55 via-black/0 to-black/0" />
-
-          {/* testimonial card */}
-          <div className="absolute bottom-6 left-6 right-20 rounded-2xl bg-black/30 p-5 text-white backdrop-blur-md">
-            <p className="text-[15px] font-medium leading-snug">
-              Signing up took less than two minutes, and the onboarding flow made it easy to get my
-              profile ready for my first client call.
-            </p>
-            <p className="mt-4 text-sm font-semibold">Janelle Carter</p>
-            <p className="text-sm text-white/70">Product Designer | Austin, Texas</p>
-          </div>
-
-          {/* nav arrows */}
-          <div className="absolute bottom-6 right-6 flex flex-col gap-3">
-            <Button
-              variant="ghost"
-              tone="neutral"
-              size="icon"
-              type="button"
-              aria-label="Next"
-              style={{
-                color: 'white',
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                backdropFilter: 'blur(4px)',
-              }}
-            >
-              <ArrowRight size={18} />
-            </Button>
-            <Button
-              variant="ghost"
-              tone="neutral"
-              size="icon"
-              type="button"
-              aria-label="Previous"
-              style={{
-                color: 'white',
-                backgroundColor: 'rgba(0, 0, 0, 0.4)',
-                backdropFilter: 'blur(4px)',
-              }}
-            >
-              <ArrowLeft size={18} />
-            </Button>
-          </div>
+        {/* Right: image carousel */}
+        <div className="relative h-96 w-full overflow-hidden bg-neutral-200 md:h-full md:min-h-0 md:w-1/2">
+          <LoginImageCarousel />
         </div>
       </div>
     </div>

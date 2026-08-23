@@ -63,7 +63,10 @@ export function Carousel({ opts, setApi, className, children, ...props }: Carous
       const isAtStart = viewport.scrollLeft <= 0;
       const isAtEnd = viewport.scrollLeft + viewport.clientWidth >= viewport.scrollWidth - 1;
       if (opts?.loop && direction === -1 && isAtStart) {
-        viewport.scrollTo({ left: viewport.scrollWidth, behavior: 'smooth' });
+        viewport.scrollTo({
+          left: viewport.scrollWidth - viewport.clientWidth,
+          behavior: 'smooth',
+        });
         return;
       }
       if (opts?.loop && direction === 1 && isAtEnd) {
@@ -112,7 +115,7 @@ export function CarouselContent({ className, ...props }: React.HTMLAttributes<HT
   return (
     <div
       ref={carouselRef}
-      className="overflow-x-auto overscroll-x-contain scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      className="h-full snap-x overflow-x-auto overscroll-x-contain scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
     >
       <div className={cn('flex', className)} {...props} />
     </div>
@@ -124,7 +127,7 @@ export function CarouselItem({ className, ...props }: React.HTMLAttributes<HTMLD
     <div
       role="group"
       aria-roledescription="slide"
-      className={cn('min-w-0 shrink-0 grow-0 basis-full snap-start', className)}
+      className={cn('relative min-w-0 shrink-0 grow-0 basis-full snap-start', className)}
       {...props}
     />
   );

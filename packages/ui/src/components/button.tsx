@@ -58,7 +58,7 @@ const baseStyle: React.CSSProperties = {
   alignItems: 'center',
   justifyContent: 'center',
   gap: '0.5rem',
-  fontWeight: 600,
+  fontWeight: 500,
   lineHeight: 1,
   transition: 'all 160ms ease',
   userSelect: 'none',
