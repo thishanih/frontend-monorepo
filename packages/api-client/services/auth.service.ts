@@ -1,6 +1,7 @@
 import type {
   LoginPayload,
   LoginResponseData,
+  UserInfo,
   ForgotPasswordPayload,
   ResetPasswordPayload,
   UserVerificationPayload,
@@ -12,6 +13,11 @@ import type { ApiResponse } from '../../types/common.interface';
 
 export const LoginApi = async (payload: LoginPayload) => {
   const res = await axiosInstance.post<ApiResponse<LoginResponseData>>(`/user/login`, payload);
+  return res;
+};
+
+export const LoginUserInfoApi = async () => {
+  const res = await axiosInstance.get<ApiResponse<UserInfo>>(`/user/info`);
   return res;
 };
 

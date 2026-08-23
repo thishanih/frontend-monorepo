@@ -23,6 +23,7 @@
     "@my-monorepo/ui": "workspace:*",
     "@my-monorepo/utils": "workspace:*",
     "@tanstack/react-query": "^5.101.4",
+    "jwt-decode": "^4.0.0",
     "lucide-react": "^1.33.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",

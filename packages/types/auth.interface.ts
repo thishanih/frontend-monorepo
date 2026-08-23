@@ -17,12 +17,17 @@ export interface ForgotPasswordPayload {
 }
 
 export interface UserInfo {
-  first_name: string;
-  middle_name: null;
-  last_name: string;
-  username: string;
-  party_id: number;
-  id: number;
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  userType: string;
+  branch: string;
+  userStatus: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  image: string;
 }
 
 export interface RefreshTokenRes {
