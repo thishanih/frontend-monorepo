@@ -1,3 +1,24 @@
+/**
+ * Renders the authentication form and processes user login requests.
+ *
+ * State Management:
+ * - Uses local state to toggle password visibility.
+ * - Uses React Hook Form with a Yup resolver to validate email and password fields.
+ * - Uses a TanStack Query mutation to submit credentials and track pending state.
+ *
+ * Data Flow:
+ * 1. User input is registered with React Hook Form and validated by the login schema.
+ * 2. Valid credentials are submitted through `LoginApi`.
+ * 3. A successful response stores access and refresh tokens, shows a toast, and navigates to `/dashboard`.
+ * 4. Failed requests show an error toast while validation messages remain attached to their fields.
+ *
+ * Component Architecture:
+ * - Uses shared `Button`, `Input`, and `Label` UI components for the form.
+ * - Renders `LoginImageCarousel` beside the form on larger screens.
+ *
+ * @component
+ */
+
 import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';

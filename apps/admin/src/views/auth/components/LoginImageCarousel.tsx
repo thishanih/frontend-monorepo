@@ -1,3 +1,14 @@
+/**
+ * Displays the testimonial image carousel used alongside the login form.
+ *
+ * Key Features:
+ * - Loops through the configured testimonial slides.
+ * - Renders each slide's image, accessible alternative text, quote, and attribution.
+ * - Provides previous and next controls through the shared carousel components.
+ *
+ * @component
+ */
+
 import {
   Carousel,
   CarouselContent,
