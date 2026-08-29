@@ -83,12 +83,17 @@ axiosInstance.interceptors.response.use(
 
         // Refresh the token using the API
         const res = await RefreshTokenApi(getRefreshToken);
+        const newAccessToken = res.data.data.token ?? res.data.data.accessToken;
+
+        if (!newAccessToken) {
+          throw new Error('Refresh response did not include a new access token');
+        }
 
         // Update the access token in cookies
-        SetCookie(ACCESS_TOKEN, res.data.data.token);
+        SetCookie(ACCESS_TOKEN, newAccessToken);
         SetCookie(REFRESH_TOKEN, res.data.data.refreshToken);
 
-        const accessToken = res.data.data.token;
+        const accessToken = newAccessToken;
 
         // Update the authorization header for the original request
         originalConfig.headers.Authorization = `Bearer ${accessToken}`;

@@ -31,7 +31,8 @@ export interface UserInfo {
 }
 
 export interface RefreshTokenRes {
-  token: string;
+  token?: string;
+  accessToken?: string;
   refreshToken: string;
   tokenLifeInSeconds: number;
 }

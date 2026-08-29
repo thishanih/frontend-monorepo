@@ -11,6 +11,7 @@ interface AuthStore {
   setUserInfo: () => Promise<void>;
   retryUserInfo: () => Promise<void>;
   clearUserInfo: () => void;
+  signOut: () => void;
 }
 
 export const useAuthStore = create<AuthStore>((set) => ({
@@ -32,6 +33,11 @@ export const useAuthStore = create<AuthStore>((set) => ({
     await useAuthStore.getState().setUserInfo();
   },
   clearUserInfo: () => {
+    RemoveCookie(ACCESS_TOKEN);
+    RemoveCookie(REFRESH_TOKEN);
+    set({ userInfo: null, isLoading: false, error: null });
+  },
+  signOut: () => {
     RemoveCookie(ACCESS_TOKEN);
     RemoveCookie(REFRESH_TOKEN);
     set({ userInfo: null, isLoading: false, error: null });
