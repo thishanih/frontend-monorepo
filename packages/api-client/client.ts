@@ -83,7 +83,7 @@ axiosInstance.interceptors.response.use(
 
         // Refresh the token using the API
         const res = await RefreshTokenApi(getRefreshToken);
-        const newAccessToken = res.data.data.token ?? res.data.data.accessToken;
+        const newAccessToken = res.data.data.accessToken;
 
         if (!newAccessToken) {
           throw new Error('Refresh response did not include a new access token');
