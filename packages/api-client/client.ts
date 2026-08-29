@@ -56,7 +56,11 @@ axiosInstance.interceptors.response.use(
     const originalConfig = err.config;
 
     // Check if error is due to authentication and not already retried
-    if ((err.response?.status === 401 || err.response?.status === 403) && !originalConfig._retry) {
+    if (
+      originalConfig &&
+      (err.response?.status === 401 || err.response?.status === 403) &&
+      !originalConfig._retry
+    ) {
       // If already refreshing, queue this request
       if (isRefreshing) {
         return new Promise((resolve) => {
@@ -84,11 +88,13 @@ axiosInstance.interceptors.response.use(
         SetCookie(ACCESS_TOKEN, res.data.data.token);
         SetCookie(REFRESH_TOKEN, res.data.data.refreshToken);
 
+        const accessToken = res.data.data.token;
+
         // Update the authorization header for the original request
-        originalConfig.headers['Authorization'] = `Bearer ${res.data.data.token}`;
+        originalConfig.headers.Authorization = `Bearer ${accessToken}`;
 
         // Process all queued requests with the new token
-        failedRequestsQueue.forEach((callback) => callback(res.data.data.token));
+        failedRequestsQueue.forEach((callback) => callback(accessToken));
         failedRequestsQueue = [];
 
         return axiosInstance(originalConfig);
@@ -99,13 +105,15 @@ axiosInstance.interceptors.response.use(
         // Clear tokens and redirect to login
         RemoveCookie(ACCESS_TOKEN);
         RemoveCookie(REFRESH_TOKEN);
-        window.location.href = '/'; // Redirect to login page
+        window.location.href = '/sign-in';
 
         return Promise.reject(_error);
       } finally {
         isRefreshing = false;
       }
     }
+
+    return Promise.reject(err);
   },
 );
 export default axiosInstance;

@@ -2,8 +2,8 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import '@my-monorepo/design-system/styles.css';
 import '@my-monorepo/ui/styles.css';
+import '@my-monorepo/design-system/styles.css';
 import App from './App.tsx';
 import { ErrorBoundary } from './components/ErrorBoundary';
 

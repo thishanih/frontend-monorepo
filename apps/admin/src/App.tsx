@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
 const Login = lazy(() => import('./views/auth/views/Login'));
-const Dashboard = lazy(() => import('./views/dashboard/Dashboard'));
+const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 const ProtectedRoute = lazy(() => import('./helpers/ProtectRoute'));
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
         <Routes>
           <Route path="/sign-in" element={<Login />} />
           <Route element={<ProtectedRoute />}>
-            <Route path="*" element={<Dashboard />} />
+            <Route path="*" element={<DefaultLayout />} />
           </Route>
         </Routes>
       </Fragment>

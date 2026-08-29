@@ -71,18 +71,18 @@ export default function Login() {
     loginMutation.mutate({ email: values.email, password: values.password });
 
   return (
-    <div className="flex h-screen w-full items-center justify-center">
-      <div className="flex h-full w-full flex-col overflow-hidden shadow-xl md:flex-row">
+    <div className="min-h-screen w-full overflow-y-auto bg-white md:h-screen md:overflow-hidden">
+      <div className="flex min-h-screen w-full flex-col md:h-full md:min-h-0 md:flex-row">
         {/* Left: form panel */}
-        <div className="flex w-full flex-col px-8 py-10 sm:px-16 md:w-1/2">
-          <div className="mb-24 flex items-center gap-2">
+        <div className="flex w-full flex-col px-6 py-8 sm:px-16 sm:py-10 md:w-1/2">
+          <div className="mb-12 flex items-center gap-2 sm:mb-16 md:mb-24">
             <span className="-skew-x-12 select-none text-xl font-black leading-none tracking-tighter">
               ///
             </span>
             <span className="text-lg font-semibold text-neutral-900">Untitled UI</span>
           </div>
 
-          <div className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center">
+          <div className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center pb-8 md:pb-0">
             <h1 className="text-left text-2xl font-semibold text-neutral-900">
               Login to your account
             </h1>
@@ -172,7 +172,7 @@ export default function Login() {
         </div>
 
         {/* Right: image carousel */}
-        <div className="relative h-96 w-full overflow-hidden bg-neutral-200 md:h-full md:min-h-0 md:w-1/2">
+        <div className="relative hidden w-full overflow-hidden bg-neutral-200 md:block md:h-full md:min-h-0 md:w-1/2">
           <LoginImageCarousel />
         </div>
       </div>
