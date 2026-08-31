@@ -106,7 +106,7 @@ export function AppHeader() {
           className="scrollbar-none ml-3 min-w-0 flex-1 justify-start overflow-x-auto sm:ml-5 sm:overflow-visible [&::-webkit-scrollbar]:hidden"
           aria-label="Header navigation"
         >
-          <ul className="flex w-max shrink-0 list-none items-center justify-start gap-1 space-x-0">
+          <ul className="flex w-max shrink-0 list-none items-center justify-start gap-x-2.5 space-x-0">
             {headerNavigation.map((item) => (
               <li key={item.label} className="relative z-0">
                 <Link
@@ -119,7 +119,12 @@ export function AppHeader() {
               </li>
             ))}
             {subNavigation.map((section) => (
-              <li key={section.label} className="relative z-20">
+              <li
+                key={section.label}
+                className="relative z-20"
+                onMouseEnter={() => setOpenSection(section.label)}
+                onMouseLeave={() => setOpenSection('')}
+              >
                 <button
                   type="button"
                   onMouseDown={() =>
@@ -141,20 +146,22 @@ export function AppHeader() {
                   />
                 </button>
                 {openSection === section.label && (
-                  <div className="absolute left-0 top-full z-50 mt-3 w-[min(600px,calc(100vw-2rem))] rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
-                    <div className="grid gap-1 sm:grid-cols-2">
-                      {section.items.map((item) => (
-                        <Link
-                          key={item.label}
-                          to={item.href}
-                          className="flex flex-col gap-1 rounded-lg px-3 py-2.5 text-sm transition-colors hover:bg-slate-100"
-                        >
-                          <span className="font-medium leading-none text-slate-950">
-                            {item.label}
-                          </span>
-                          <span className="line-clamp-2 text-slate-500">{item.description}</span>
-                        </Link>
-                      ))}
+                  <div className="absolute left-0 top-full z-50 w-[min(600px,calc(100vw-2rem))] pt-3">
+                    <div className="rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
+                      <div className="grid gap-1 sm:grid-cols-2">
+                        {section.items.map((item) => (
+                          <Link
+                            key={item.label}
+                            to={item.href}
+                            className="flex flex-col gap-1 rounded-lg px-3 py-2.5 text-sm transition-colors hover:bg-slate-100"
+                          >
+                            <span className="font-medium leading-none text-slate-950">
+                              {item.label}
+                            </span>
+                            <span className="line-clamp-2 text-slate-500">{item.description}</span>
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 )}
