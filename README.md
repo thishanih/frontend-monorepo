@@ -18,16 +18,31 @@ my-monorepo/
 │  │  ├─ src/
 │  │  │  ├─ assets/
 │  │  │  ├─ components/
-│  │  │  ├─ lib/
+│  │  │  ├─ helpers/
+│  │  │  ├─ layout/
+│  │  │  ├─ store/
+│  │  │  ├─ styles/
+│  │  │  ├─ theme/
+│  │  │  ├─ types/
 │  │  │  ├─ views/
-│  │  │  ├─ App.css
 │  │  │  ├─ App.tsx
-│  │  │  ├─ index.css
-│  │  │  └─ main.tsx
-│  │  ├─ components.json
+│  │  │  ├─ main.tsx
+│  │  │  └─ router.ts
+│  │  │  └─ sidebar.ts
 │  │  ├─ package.json
 │  │  └─ vite.config.ts
 │  └─ customer/
+│     ├─ public/
+│     ├─ src/
+│     │  ├─ assets/
+│     │  ├─ components/
+│     │  ├─ lib/
+│     │  ├─ App.css
+│     │  ├─ App.tsx
+│     │  ├─ index.css
+│     │  └─ main.tsx
+│     ├─ package.json
+│     └─ vite.config.ts
 ├─ packages/
 │  ├─ api-client/
 │  │  ├─ client.ts
@@ -38,7 +53,14 @@ my-monorepo/
 │  │  ├─ package.json
 │  │  └─ src/
 │  │     ├─ components/
-│  │     │  └─ button.tsx
+│  │     │  ├─ button.tsx
+│  │     │  ├─ carousel.tsx
+│  │     │  ├─ dropdown-menu.tsx
+│  │     │  ├─ input.tsx
+│  │     │  ├─ label.tsx
+│  │     │  └─ navigation-menu.tsx
+│  │     ├─ lib/
+│  │     │  └─ utils.ts
 │  │     ├─ styles.css
 │  │     └─ index.ts
 │  ├─ design-system/
