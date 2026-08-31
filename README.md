@@ -1,4 +1,4 @@
-# My Monorepo
+# Monorepo Architecture
 
 A Turborepo + pnpm workspace with multiple frontend apps and shared packages.
 
