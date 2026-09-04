@@ -29,7 +29,9 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { Button, Input, Label } from '@my-monorepo/ui';
 import { LoginApi } from '@my-monorepo/api-client/services/auth.service';
-import { ACCESS_TOKEN, REFRESH_TOKEN, SetCookie } from '@my-monorepo/utils';
+import { SetCookie } from '@my-monorepo/utils/cookies';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '@my-monorepo/utils/enum';
+import { MainLogo } from '@my-monorepo/utils/images';
 import { LoginImageCarousel } from '../components/LoginImageCarousel';
 
 const loginSchema = yup.object({
@@ -76,10 +78,8 @@ export default function Login() {
         {/* Left: form panel */}
         <div className="flex w-full flex-col px-6 py-8 sm:px-16 sm:py-10 md:w-1/2">
           <div className="mb-12 flex items-center gap-2 sm:mb-16 md:mb-24">
-            <span className="-skew-x-12 select-none text-xl font-black leading-none tracking-tighter">
-              ///
-            </span>
-            <span className="text-lg font-semibold text-neutral-900">Untitled UI</span>
+            <img src={MainLogo} alt="Steadi" className="h-20 object-contain" />
+            <span className="text-2xl font-semibold text-neutral-900">Steadi</span>
           </div>
 
           <div className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center pb-8 md:pb-0">

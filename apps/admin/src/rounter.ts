@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { RoleEnum } from '@my-monorepo/utils';
+import { RoleEnum } from '@my-monorepo/utils/enum';
 
 const Dashboard = lazy(() => import('./views/dashboard/Dashboard'));
 

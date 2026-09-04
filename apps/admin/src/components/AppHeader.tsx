@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Bell, ChevronDown, Grid2X2, Settings } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { MainLogo } from '@my-monorepo/utils/images';
 import { UserInfoDropdown } from './UserInfoDropdown';
 const headerNavigation = [{ label: 'Dashboard', href: '/dashboard', active: true }];
 
@@ -93,13 +94,7 @@ export function AppHeader() {
     >
       <div className="flex min-w-0 flex-1 items-center gap-3">
         <Link to="/dashboard" className="flex shrink-0 items-center gap-3 text-slate-950">
-          <span className="flex size-10 items-center justify-center rounded-full bg-orange-500 text-white shadow-sm">
-            <span className="flex flex-col gap-1">
-              <span className="h-0.5 w-5 rounded-full bg-white" />
-              <span className="h-0.5 w-3.5 rounded-full bg-white" />
-              <span className="h-0.5 w-5 rounded-full bg-white" />
-            </span>
-          </span>
+          <img src={MainLogo} alt="Steadi" className="size-10 object-contain" />
           <span className="hidden text-xl font-semibold tracking-tight sm:inline">Steadi</span>
         </Link>
         <nav

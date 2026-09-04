@@ -30,7 +30,8 @@
 import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-import { GetCookie, REFRESH_TOKEN } from '@my-monorepo/utils';
+import { GetCookie } from '@my-monorepo/utils/cookies';
+import { REFRESH_TOKEN } from '@my-monorepo/utils/enum';
 import { useAuthStore } from '../store/auth.store';
 
 const isTokenExpired = (token: string) => {

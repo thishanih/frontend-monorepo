@@ -13,14 +13,9 @@
 
 import axios from 'axios';
 import type { AxiosInstance, AxiosResponse } from 'axios';
-import {
-  ACCESS_TOKEN,
-  API_BASE_URL,
-  GetCookie,
-  REFRESH_TOKEN,
-  RemoveCookie,
-  SetCookie,
-} from '@my-monorepo/utils';
+import { API_BASE_URL } from '@my-monorepo/utils/config';
+import { GetCookie, RemoveCookie, SetCookie } from '@my-monorepo/utils/cookies';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '@my-monorepo/utils/enum';
 
 import { RefreshTokenApi } from './services/auth.service';
 

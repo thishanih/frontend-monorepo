@@ -3,12 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
   "exports": {
-    ".": "./src/index.ts",
-    "./cn": "./src/cn.ts",
-    "./config": "./src/config.ts"
+    "./config": "./src/config.ts",
+    "./cookies": "./src/cookies.ts",
+    "./enum": "./src/enum.ts",
+    "./images": "./src/images.ts"
   },
   "dependencies": {
     "js-cookie": "^3.0.8",

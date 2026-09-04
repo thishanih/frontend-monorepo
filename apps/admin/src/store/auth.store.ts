@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { ACCESS_TOKEN, REFRESH_TOKEN, RemoveCookie } from '@my-monorepo/utils';
+import { RemoveCookie } from '@my-monorepo/utils/cookies';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '@my-monorepo/utils/enum';
 import { LoginUserInfoApi } from '@my-monorepo/api-client/services/auth.service';
 import type { UserInfo } from '../../../../packages/types/auth.interface';
 import toast from 'react-hot-toast';
