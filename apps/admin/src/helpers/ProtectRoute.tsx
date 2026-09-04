@@ -32,7 +32,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { GetCookie } from '@my-monorepo/utils/cookies';
 import { REFRESH_TOKEN } from '@my-monorepo/utils/enum';
-import { useAuthStore } from '../store/auth.store';
+import { useAppStore } from '../store';
 
 const isTokenExpired = (token: string) => {
   try {
@@ -45,12 +45,12 @@ const isTokenExpired = (token: string) => {
 
 const ProtectRoute = () => {
   const navigator = useNavigate();
-  const userInfoState = useAuthStore((state) => state.userInfo);
-  const setUserInfo = useAuthStore((state) => state.setUserInfo);
-  const retryUserInfo = useAuthStore((state) => state.retryUserInfo);
-  const clearUserInfo = useAuthStore((state) => state.clearUserInfo);
-  const isLoading = useAuthStore((state) => state.isLoading);
-  const error = useAuthStore((state) => state.error);
+  const userInfoState = useAppStore((state) => state.userInfo);
+  const setUserInfo = useAppStore((state) => state.setUserInfo);
+  const retryUserInfo = useAppStore((state) => state.retryUserInfo);
+  const clearUserInfo = useAppStore((state) => state.clearUserInfo);
+  const isLoading = useAppStore((state) => state.isLoading);
+  const error = useAppStore((state) => state.error);
 
   useEffect(() => {
     const refreshToken = GetCookie(REFRESH_TOKEN);

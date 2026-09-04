@@ -1,11 +1,11 @@
-import { create } from 'zustand';
 import { RemoveCookie } from '@my-monorepo/utils/cookies';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '@my-monorepo/utils/enum';
 import { LoginUserInfoApi } from '@my-monorepo/api-client/services/auth.service';
 import type { UserInfo } from '../../../../packages/types/auth.interface';
 import toast from 'react-hot-toast';
+import type { StateCreator } from 'zustand';
 
-interface AuthStore {
+export interface AuthSlice {
   userInfo: UserInfo | null;
   isLoading: boolean;
   error: string | null;
@@ -15,7 +15,7 @@ interface AuthStore {
   signOut: () => void;
 }
 
-export const useAuthStore = create<AuthStore>((set) => ({
+export const createAuthSlice: StateCreator<AuthSlice> = (set, get) => ({
   userInfo: null,
   isLoading: false,
   error: null,
@@ -31,7 +31,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
     }
   },
   retryUserInfo: async () => {
-    await useAuthStore.getState().setUserInfo();
+    await get().setUserInfo();
   },
   clearUserInfo: () => {
     RemoveCookie(ACCESS_TOKEN);
@@ -43,4 +43,4 @@ export const useAuthStore = create<AuthStore>((set) => ({
     RemoveCookie(REFRESH_TOKEN);
     set({ userInfo: null, isLoading: false, error: null });
   },
-}));
+});

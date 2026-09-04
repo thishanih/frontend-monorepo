@@ -8,12 +8,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@my-monorepo/ui';
-import { useAuthStore } from '../store/auth.store';
+import { useAppStore } from '../store';
 
 export function UserInfoDropdown() {
   const navigate = useNavigate();
-  const userInfo = useAuthStore((state) => state.userInfo);
-  const signOut = useAuthStore((state) => state.signOut);
+  const userInfo = useAppStore((state) => state.userInfo);
+  const signOut = useAppStore((state) => state.signOut);
 
   const handleSignOut = () => {
     signOut();
