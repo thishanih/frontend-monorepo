@@ -20,10 +20,11 @@ my-monorepo/
 │  │  │  ├─ components/
 │  │  │  ├─ helpers/
 │  │  │  ├─ layout/
+│  │  │  ├─ reusable/
 │  │  │  ├─ store/
 │  │  │  ├─ styles/
 │  │  │  ├─ theme/
-│  │  │  ├─ types/
+│  │  │  ├─ interfaces/
 │  │  │  ├─ views/
 │  │  │  ├─ App.tsx
 │  │  │  ├─ main.tsx
@@ -93,6 +94,21 @@ my-monorepo/
 ├─ turbo.json
 └─ pnpm-lock.yaml
 ```
+
+## Admin Routing and Access Control
+
+The admin app uses React Router with a protected route boundary:
+
+- `/sign-in` is the public login route.
+- Authenticated pages render inside `ProtectRoute` and `DefaultLayout`.
+- `/` and `/dashboard` render the dashboard.
+- Each route declares permitted roles using `RoleEnum` values (`Admin` and
+  `staff`). `DefaultLayout` filters the route list using the authenticated
+  user's `userType` before rendering nested routes.
+- `useAppStore` combines authentication and dashboard state with Zustand.
+
+See [apps/admin/README.md](apps/admin/README.md) for the app-level flow and
+source layout.
 
 ## Workspace Layout
 
