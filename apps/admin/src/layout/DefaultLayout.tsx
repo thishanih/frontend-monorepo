@@ -13,7 +13,7 @@
  * - Reads the authenticated user's `userType` from the shared Zustand store.
  * - Renders only routes whose `permission` list includes that role.
  */
-
+import { useMemo } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import RoutesLayoutData from '../router';
 import { AppHeader } from '../components/AppHeader';
@@ -22,9 +22,11 @@ import { useAppStore } from '../store';
 export default function DefaultLayout() {
   const userType = useAppStore((state) => state.userInfo?.userType);
 
-  const permittedRoutes = RoutesLayoutData.filter((route) =>
-    userType ? route.permission.includes(userType) : false,
-  );
+  const permittedRoutes = useMemo(() => {
+    return RoutesLayoutData.filter((route) =>
+      userType ? route.permission.includes(userType) : false,
+    );
+  }, [userType]);
 
   return (
     <div className="flex min-h-screen bg-slate-50 text-slate-900">
