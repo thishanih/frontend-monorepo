@@ -20,21 +20,21 @@ import {
 const slides = [
   {
     image:
-      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&h=1400&fit=crop&auto=format',
-    alt: 'Team members collaborating around a laptop in a bright workspace',
-    quote:
-      'Signing up took less than two minutes, and the onboarding flow made it easy to get my profile ready for my first client call.',
-    name: 'Janelle Carter',
-    role: 'Product Designer | Austin, Texas',
-  },
-  {
-    image:
       'https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=1200&h=1400&fit=crop&auto=format',
     alt: 'A bright modern office with desks and plants',
     quote:
       'The workspace keeps our team aligned, so every project feels clear from the first conversation to launch day.',
     name: 'Marcus Lee',
     role: 'Operations Lead | Seattle, Washington',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&h=1400&fit=crop&auto=format',
+    alt: 'Team members collaborating around a laptop in a bright workspace',
+    quote:
+      'Signing up took less than two minutes, and the onboarding flow made it easy to get my profile ready for my first client call.',
+    name: 'Janelle Carter',
+    role: 'Product Designer | Austin, Texas',
   },
 ];
 
