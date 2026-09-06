@@ -12,7 +12,7 @@ import axiosInstance from '../client';
 import type { ApiResponse } from '../../types/common.interface';
 
 export const LoginApi = async (payload: LoginPayload) => {
-  const res = await axiosInstance.post<ApiResponse<LoginResponseData>>(`/user/login`, payload);
+  const res = await axiosInstance.post<ApiResponse<LoginResponseData>>(`/auth/login`, payload);
   return res;
 };
 
@@ -37,7 +37,7 @@ export const ResetPasswordApi = async (resetPayload: ResetPasswordPayload) => {
 };
 
 export const RefreshTokenApi = async (refresh_token: string) => {
-  const res = await axiosInstance.get<ApiResponse<RefreshTokenRes>>(`/user/refresh-token`, {
+  const res = await axiosInstance.get<ApiResponse<RefreshTokenRes>>(`/auth/refresh-token`, {
     headers: {
       Authorization: `Bearer ${refresh_token}`,
     },
