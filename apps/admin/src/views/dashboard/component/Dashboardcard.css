@@ -1,0 +1,109 @@
+:root {
+  --dashboard-border: #e2e8f0;
+  --dashboard-surface: #ffffff;
+  --dashboard-ink: #0f172a;
+  --dashboard-active-start: #075b3c;
+  --dashboard-active-end: #15945e;
+  --dashboard-active-ink: #f7fee7;
+  --dashboard-active-control: #ffffff;
+  --dashboard-tile-radius: 1.5rem;
+  --dashboard-tile-padding: 1.25rem;
+  --dashboard-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dashboard-card {
+  animation: dashboard-card-enter 650ms var(--dashboard-motion-ease) both;
+}
+
+.dashboard-card__content {
+  animation: dashboard-content-enter 800ms 80ms var(--dashboard-motion-ease) both;
+}
+
+.dashboard-status-tile {
+  animation: dashboard-row-enter 550ms var(--row-delay) var(--dashboard-motion-ease) both;
+  border: 1px solid var(--dashboard-border);
+  border-radius: var(--dashboard-tile-radius);
+  background: var(--dashboard-surface);
+  color: var(--dashboard-ink);
+  padding: var(--dashboard-tile-padding);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.dashboard-status-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 30px -22px rgba(15, 23, 42, 0.55);
+}
+
+.dashboard-status-tile--active {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--dashboard-active-start), var(--dashboard-active-end));
+  color: var(--dashboard-active-ink);
+}
+
+.dashboard-status-tile__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+  border: 1px solid currentColor;
+  border-radius: 9999px;
+}
+
+.dashboard-status-tile--active .dashboard-status-tile__arrow {
+  background: var(--dashboard-active-control);
+  color: var(--dashboard-ink);
+}
+
+.dashboard-card__row {
+  animation: dashboard-row-enter 550ms var(--row-delay) var(--dashboard-motion-ease) both;
+}
+
+@keyframes dashboard-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dashboard-content-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes dashboard-row-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-card,
+  .dashboard-card__content,
+  .dashboard-card__row,
+  .dashboard-status-tile {
+    animation: none;
+  }
+
+  .dashboard-status-tile:hover {
+    transform: none;
+  }
+}

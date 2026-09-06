@@ -32,7 +32,7 @@ export default function DefaultLayout() {
     <div className="flex min-h-screen bg-slate-50 text-slate-900">
       <div className="min-w-0 flex-1">
         <AppHeader />
-        <main className="p-4 sm:p-6 lg:p-8">
+        <main>
           <Routes>
             {permittedRoutes.map((route) => (
               <Route key={route.id} path={route.path} element={<route.element />} />
