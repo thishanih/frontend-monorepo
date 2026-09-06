@@ -6,8 +6,8 @@
   --dashboard-active-end: #15945e;
   --dashboard-active-ink: #f7fee7;
   --dashboard-active-control: #ffffff;
-  --dashboard-tile-radius: 1.5rem;
-  --dashboard-tile-padding: 1.25rem;
+  --dashboard-tile-radius: 1.25rem;
+  --dashboard-tile-padding: 1rem;
   --dashboard-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -46,8 +46,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
   flex-shrink: 0;
   border: 1px solid currentColor;
   border-radius: 9999px;

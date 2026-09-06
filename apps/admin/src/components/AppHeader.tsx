@@ -106,7 +106,7 @@ export function AppHeader() {
               <li key={item.label} className="relative z-0">
                 <Link
                   to={item.href}
-                  className="rounded-full bg-slate-950 px-4 py-2.5 text-sm font-medium text-white transition-colors"
+                  className="rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-medium text-white transition-colors"
                 >
                   {item.label === 'Dashboard' && <Grid2X2 className="mr-2 inline size-4" />}
                   {item.label}
@@ -126,7 +126,7 @@ export function AppHeader() {
                     setOpenSection((current) => (current === section.label ? '' : section.label))
                   }
                   aria-expanded={openSection === section.label}
-                  className={`inline-flex h-auto items-center rounded-full px-4 py-2.5 text-sm font-medium transition-colors ${
+                  className={`inline-flex h-auto items-center rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
                     openSection === section.label
                       ? 'bg-slate-100 text-slate-950'
                       : 'bg-transparent text-slate-500 hover:bg-slate-100 hover:text-slate-950'
