@@ -1,11 +1,8 @@
-import { ChartNoAxesCombined } from 'lucide-react';
-import { useDashboardQuery } from '../hooks/useDashboardQuery';
+import DashboardBalances from './DashboardBalances';
 import DashboardStatusList from './DashboardStatusList';
 import './Dashboardcard.css';
 
 export default function DashboardOverview() {
-  const { data: statusCounts = [], isLoading, isError, refetch } = useDashboardQuery();
-
   return (
     <section className="dashboard-card relative overflow-hidden border border-slate-200 bg-white">
       <div className="dashboard-card__aurora">
@@ -122,22 +119,21 @@ export default function DashboardOverview() {
       </div>
       <div className="absolute inset-0 bg-white/0" />
 
-      <div className="dashboard-card__content relative z-10 max-w-2xl p-6 text-slate-950 sm:p-8 lg:p-10">
-        <div className="flex items-start justify-between gap-4">
+      <div className="dashboard-card__content relative z-10 p-6 text-slate-950 sm:p-8 lg:p-10">
+        <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(18rem,0.7fr)]">
           <div>
-            <p className="text-3xl font-semibold uppercase text-slate-950">Order status overview</p>
-            <p className="mt-2 text-sm text-slate-700/80">Total orders across all statuses</p>
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-3xl font-semibold uppercase text-slate-950">
+                  Order status overview
+                </p>
+                <p className="mt-2 text-sm text-slate-700/80">Total orders across all statuses</p>
+              </div>
+            </div>
+            <DashboardStatusList />
           </div>
-          <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-lime-300 text-slate-950">
-            <ChartNoAxesCombined aria-hidden="true" size={23} />
-          </div>
+          <DashboardBalances />
         </div>
-        <DashboardStatusList
-          isError={isError}
-          isLoading={isLoading}
-          refetch={() => refetch()}
-          statusCounts={statusCounts}
-        />
       </div>
     </section>
   );

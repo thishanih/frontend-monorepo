@@ -1,21 +1,11 @@
 import type { CSSProperties } from 'react';
 import { ArrowUpRight, TrendingUp } from 'lucide-react';
-import type { DashboardStatusCount } from '../hooks/useDashboardQuery';
+import { useDashboardQuery } from '../hooks/useDashboardQuery';
 import DashboardStatusListLoading from './DashboardStatusListLoading';
 
-interface DashboardStatusListProps {
-  isError: boolean;
-  isLoading: boolean;
-  refetch: () => void;
-  statusCounts: DashboardStatusCount[];
-}
+export default function DashboardStatusList() {
+  const { data: statusCounts = [], isLoading, isError, refetch } = useDashboardQuery();
 
-export default function DashboardStatusList({
-  isError,
-  isLoading,
-  refetch,
-  statusCounts,
-}: DashboardStatusListProps) {
   if (isLoading) {
     return <DashboardStatusListLoading />;
   }
@@ -26,7 +16,7 @@ export default function DashboardStatusList({
         <p className="text-sm">Unable to load order status data.</p>
         <button
           className="mt-3 text-sm font-semibold underline underline-offset-4"
-          onClick={refetch}
+          onClick={() => refetch()}
           type="button"
         >
           Try again

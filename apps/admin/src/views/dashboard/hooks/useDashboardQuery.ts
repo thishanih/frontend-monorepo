@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { GetOrderStatusCountApi } from '@my-monorepo/api-client/services/dashboard.service';
+import { getDashboardDateRange } from './dashboardDateRange';
 
 export interface DashboardStatusCount {
   label: string;
@@ -9,16 +10,8 @@ export interface DashboardStatusCount {
 const formatStatusLabel = (status: string) =>
   status.replace(/[-_]+/g, ' ').replace(/\b\w/g, (letter) => letter.toUpperCase());
 
-const getDateRange = () => {
-  const today = new Date();
-  const endDate = today.toISOString().slice(0, 10);
-  const startDate = `${today.getUTCFullYear()}-01-01`;
-
-  return { startDate, endDate };
-};
-
 export const useDashboardQuery = () => {
-  const dateRange = getDateRange();
+  const dateRange = getDashboardDateRange();
 
   return useQuery({
     queryKey: ['dashboard', 'order-status-count', dateRange],

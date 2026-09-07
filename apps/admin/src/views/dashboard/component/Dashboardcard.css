@@ -2,9 +2,10 @@
   --dashboard-border: #e2e8f0;
   --dashboard-surface: #ffffff;
   --dashboard-ink: #0f172a;
-  --dashboard-active-start: #075b3c;
-  --dashboard-active-end: #15945e;
-  --dashboard-active-ink: #f7fee7;
+  --dashboard-active-start: #061a35;
+  --dashboard-active-mid: #0b3f77;
+  --dashboard-active-end: #1677a8;
+  --dashboard-active-ink: #f8fafc;
   --dashboard-active-control: #ffffff;
   --dashboard-tile-radius: 1.25rem;
   --dashboard-tile-padding: 1rem;
@@ -255,8 +256,18 @@
 
 .dashboard-status-tile--active {
   border-color: transparent;
-  background: linear-gradient(135deg, var(--dashboard-active-start), var(--dashboard-active-end));
+  background:
+    radial-gradient(circle at 88% -20%, rgba(255, 255, 255, 0.2), transparent 34%),
+    linear-gradient(
+      135deg,
+      var(--dashboard-active-start),
+      var(--dashboard-active-mid) 52%,
+      var(--dashboard-active-end)
+    );
   color: var(--dashboard-active-ink);
+  box-shadow:
+    0 20px 36px -26px rgba(3, 37, 78, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
 .dashboard-status-tile__arrow {
@@ -273,6 +284,12 @@
 .dashboard-status-tile--active .dashboard-status-tile__arrow {
   background: var(--dashboard-active-control);
   color: var(--dashboard-ink);
+}
+
+.dashboard-status-tile--active:hover {
+  box-shadow:
+    0 24px 42px -24px rgba(3, 37, 78, 0.95),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .dashboard-card__row {
