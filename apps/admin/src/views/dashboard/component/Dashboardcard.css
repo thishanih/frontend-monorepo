@@ -20,11 +20,102 @@
   inset: 0;
   overflow: hidden;
   background: #ffffff;
+  isolation: isolate;
   perspective: 900px;
   perspective-origin: 50% 0%;
 }
 
+.dashboard-card__ribbons {
+  position: absolute;
+  z-index: 1;
+  inset: -8% -16% -4% -18%;
+  width: 134%;
+  height: 112%;
+  transform-origin: 15% 0%;
+  animation: dashboard-ribbons-flow 18s ease-in-out infinite alternate;
+  filter: drop-shadow(0 18px 18px rgba(99, 102, 241, 0.16));
+  will-change: transform;
+}
+
+.dashboard-card__ribbon-highlight {
+  stroke: rgba(255, 255, 255, 0.62);
+  stroke-linecap: round;
+  stroke-width: 18;
+  filter: blur(7px);
+  animation: dashboard-ribbon-shine 18s ease-in-out infinite alternate;
+}
+
+.dashboard-card__ribbon-wave-line {
+  stroke: rgba(255, 255, 255, 0.72);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 180 920;
+  filter: drop-shadow(0 2px 5px rgba(255, 255, 255, 0.75));
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: dashboard-ribbon-wave-line 26s ease-in-out infinite;
+}
+
+.dashboard-card__ribbons > path:nth-of-type(8) {
+  animation-duration: 29s;
+  animation-delay: -8s;
+}
+
+.dashboard-card__ribbons > path:nth-of-type(9) {
+  animation-duration: 33s;
+  animation-delay: -15s;
+}
+
+.dashboard-card__ribbons > path:nth-of-type(10) {
+  animation-duration: 37s;
+  animation-delay: -22s;
+}
+
+.dashboard-card__stripe-sheen {
+  position: absolute;
+  z-index: 2;
+  inset: -40% -70%;
+  background: linear-gradient(
+    112deg,
+    transparent 42%,
+    rgba(255, 255, 255, 0.08) 46%,
+    rgba(255, 255, 255, 0.52) 50%,
+    rgba(255, 255, 255, 0.08) 54%,
+    transparent 58%
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: dashboard-stripe-sheen 11s ease-in-out infinite;
+}
+
+.dashboard-card__ribbons > path:nth-of-type(-n + 4) {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: dashboard-ribbon-sway 11s ease-in-out infinite alternate;
+}
+
+.dashboard-card__ribbons > path:nth-of-type(2) {
+  animation-duration: 26s;
+  animation-delay: -5s;
+}
+
+.dashboard-card__ribbons > path:nth-of-type(3) {
+  animation-duration: 30s;
+  animation-delay: -11s;
+}
+
+.dashboard-card__ribbons > path:nth-of-type(4) {
+  animation-duration: 34s;
+  animation-delay: -17s;
+}
+
+.dashboard-card__aurora > .dashboard-card__wave-layer {
+  display: none;
+}
+
 .dashboard-card__aurora::before {
+  z-index: 0;
   position: absolute;
   top: -28%;
   right: -12%;
@@ -38,6 +129,7 @@
 }
 
 .dashboard-card__aurora::after {
+  z-index: 0;
   position: absolute;
   right: -12%;
   bottom: -28%;
@@ -95,6 +187,23 @@
   filter: drop-shadow(0 8px 9px rgba(99, 102, 241, 0.12));
   animation: dashboard-wave-scroll linear infinite;
   will-change: transform;
+}
+
+.dashboard-card__wave-highlight {
+  stroke: #ffffff;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 11;
+  filter: drop-shadow(0 2px 5px rgba(255, 255, 255, 0.75));
+  animation: dashboard-wave-highlight 7s ease-in-out infinite alternate;
+}
+
+.dashboard-card__wave-glint {
+  opacity: 0.72;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 1px 4px rgba(255, 255, 255, 0.9));
+  animation: dashboard-wave-glint 10s linear infinite;
 }
 
 .dashboard-card__wave--pink {
@@ -212,12 +321,85 @@
   }
 }
 
+@keyframes dashboard-ribbons-flow {
+  from {
+    transform: translate3d(-1.5%, -1%, 0) rotate(-1deg) scale(1.02);
+  }
+  to {
+    transform: translate3d(2%, 1.5%, 0) rotate(1deg) scale(1.06);
+  }
+}
+
+@keyframes dashboard-ribbon-shine {
+  from {
+    opacity: 0.28;
+  }
+  to {
+    opacity: 0.72;
+  }
+}
+
+@keyframes dashboard-ribbon-wave-line {
+  0% {
+    opacity: 0.16;
+    stroke-dashoffset: 0;
+    transform: translate3d(-0.7%, 0.3%, 0) rotate(-0.3deg);
+  }
+  50% {
+    opacity: 0.68;
+  }
+  100% {
+    opacity: 0.2;
+    stroke-dashoffset: -1100;
+    transform: translate3d(0.7%, -0.3%, 0) rotate(0.3deg);
+  }
+}
+
+@keyframes dashboard-ribbon-sway {
+  from {
+    transform: translate3d(-0.5%, -0.5%, 0) rotate(-0.8deg);
+  }
+  to {
+    transform: translate3d(0.8%, 0.7%, 0) rotate(0.8deg);
+  }
+}
+
+@keyframes dashboard-stripe-sheen {
+  0%,
+  100% {
+    transform: translate3d(-26%, 8%, 0) rotate(-4deg);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate3d(26%, -8%, 0) rotate(4deg);
+    opacity: 0.78;
+  }
+}
+
 @keyframes dashboard-wave-rotate {
   from {
     transform: translateZ(var(--wave-depth)) rotateX(1deg) rotateY(-2deg) rotateZ(-2deg);
   }
   to {
     transform: translateZ(var(--wave-depth)) rotateX(-1deg) rotateY(2deg) rotateZ(2deg);
+  }
+}
+
+@keyframes dashboard-wave-highlight {
+  from {
+    opacity: 0.42;
+  }
+  to {
+    opacity: 0.9;
+  }
+}
+
+@keyframes dashboard-wave-glint {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -560;
   }
 }
 
@@ -248,8 +430,22 @@
   }
 
   .dashboard-card__wave,
-  .dashboard-card__wave-layer {
+  .dashboard-card__wave-layer,
+  .dashboard-card__wave-highlight,
+  .dashboard-card__wave-glint {
     animation: none;
+  }
+
+  .dashboard-card__ribbons,
+  .dashboard-card__ribbon-highlight,
+  .dashboard-card__ribbon-wave-line,
+  .dashboard-card__ribbons > path,
+  .dashboard-card__stripe-sheen {
+    animation: none;
+  }
+
+  .dashboard-card__ribbon-gradient-motion {
+    display: none;
   }
 
   .dashboard-card__aurora::after {

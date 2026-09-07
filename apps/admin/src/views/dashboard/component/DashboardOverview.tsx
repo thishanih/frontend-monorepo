@@ -9,110 +9,116 @@ export default function DashboardOverview() {
   return (
     <section className="dashboard-card relative overflow-hidden border border-slate-200 bg-white">
       <div className="dashboard-card__aurora">
-        <div className="dashboard-card__wave-layer dashboard-card__wave-layer--sky">
-          <svg
-            aria-hidden="true"
-            className="dashboard-card__wave dashboard-card__wave--sky"
-            preserveAspectRatio="none"
-            viewBox="0 0 2400 300"
-          >
-            <defs>
-              <linearGradient id="dashboard-sky-gradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#93c5fd" />
-                <stop offset="100%" stopColor="#e0e7ff" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M0,170 C200,110 400,230 600,170 C800,110 1000,230 1200,170 C1400,110 1600,230 1800,170 C2000,110 2200,230 2400,170 L2400,300 L0,300 Z"
-              fill="url(#dashboard-sky-gradient)"
-            />
-            <path
-              d="M0,170 C200,110 400,230 600,170 C800,110 1000,230 1200,170 C1400,110 1600,230 1800,170 C2000,110 2200,230 2400,170"
-              fill="none"
-              opacity="0.7"
-              stroke="#ffffff"
-              strokeWidth="7"
-            />
-          </svg>
-        </div>
-        <div className="dashboard-card__wave-layer dashboard-card__wave-layer--peach">
-          <svg
-            aria-hidden="true"
-            className="dashboard-card__wave dashboard-card__wave--peach"
-            preserveAspectRatio="none"
-            viewBox="0 0 2400 300"
-          >
-            <defs>
-              <linearGradient id="dashboard-peach-gradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#fdba74" />
-                <stop offset="100%" stopColor="#fed7aa" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M0,150 C200,90 400,210 600,150 C800,90 1000,210 1200,150 C1400,90 1600,210 1800,150 C2000,90 2200,210 2400,150 L2400,300 L0,300 Z"
-              fill="url(#dashboard-peach-gradient)"
-            />
-            <path
-              d="M0,150 C200,90 400,210 600,150 C800,90 1000,210 1200,150 C1400,90 1600,210 1800,150 C2000,90 2200,210 2400,150"
-              fill="none"
-              opacity="0.62"
-              stroke="#fff7ed"
-              strokeWidth="8"
-            />
-          </svg>
-        </div>
-        <div className="dashboard-card__wave-layer dashboard-card__wave-layer--violet">
-          <svg
-            aria-hidden="true"
-            className="dashboard-card__wave dashboard-card__wave--violet"
-            preserveAspectRatio="none"
-            viewBox="0 0 2400 300"
-          >
-            <defs>
-              <linearGradient id="dashboard-violet-gradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#c4b5fd" />
-                <stop offset="100%" stopColor="#a78bfa" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M0,130 C200,190 400,70 600,130 C800,190 1000,70 1200,130 C1400,190 1600,70 1800,130 C2000,190 2200,70 2400,130 L2400,300 L0,300 Z"
-              fill="url(#dashboard-violet-gradient)"
-            />
-            <path
-              d="M0,130 C200,190 400,70 600,130 C800,190 1000,70 1200,130 C1400,190 1600,70 1800,130 C2000,190 2200,70 2400,130"
-              fill="none"
-              opacity="0.68"
-              stroke="#ede9fe"
-              strokeWidth="7"
-            />
-          </svg>
-        </div>
-        <div className="dashboard-card__wave-layer dashboard-card__wave-layer--pink">
-          <svg
-            aria-hidden="true"
-            className="dashboard-card__wave dashboard-card__wave--pink"
-            preserveAspectRatio="none"
-            viewBox="0 0 2400 300"
-          >
-            <defs>
-              <linearGradient id="dashboard-pink-gradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#f9a8d4" />
-                <stop offset="100%" stopColor="#f472b6" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M0,110 C200,160 400,60 600,110 C800,160 1000,60 1200,110 C1400,160 1600,60 1800,110 C2000,160 2200,60 2400,110 L2400,300 L0,300 Z"
-              fill="url(#dashboard-pink-gradient)"
-            />
-            <path
-              d="M0,110 C200,160 400,60 600,110 C800,160 1000,60 1200,110 C1400,160 1600,60 1800,110 C2000,160 2200,60 2400,110"
-              fill="none"
-              opacity="0.72"
-              stroke="#fdf2f8"
-              strokeWidth="8"
-            />
-          </svg>
-        </div>
+        <svg
+          aria-hidden="true"
+          className="dashboard-card__ribbons"
+          preserveAspectRatio="none"
+          viewBox="0 0 1200 900"
+        >
+          <defs>
+            <linearGradient id="dashboard-ribbon-orange" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#fb923c" />
+              <stop offset="55%" stopColor="#f97316" />
+              <stop offset="100%" stopColor="#fb7185" />
+              <animateTransform
+                attributeName="gradientTransform"
+                className="dashboard-card__ribbon-gradient-motion"
+                dur="30s"
+                repeatCount="indefinite"
+                type="rotate"
+                values="-3 0.5 0.5; 3 0.5 0.5; -3 0.5 0.5"
+              />
+            </linearGradient>
+            <linearGradient id="dashboard-ribbon-pink" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#f472b6" />
+              <stop offset="60%" stopColor="#ec4899" />
+              <stop offset="100%" stopColor="#fb7185" />
+              <animateTransform
+                attributeName="gradientTransform"
+                className="dashboard-card__ribbon-gradient-motion"
+                dur="34s"
+                repeatCount="indefinite"
+                type="rotate"
+                values="3 0.5 0.5; -3 0.5 0.5; 3 0.5 0.5"
+              />
+            </linearGradient>
+            <linearGradient id="dashboard-ribbon-violet" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#f0abfc" />
+              <stop offset="52%" stopColor="#c084fc" />
+              <stop offset="100%" stopColor="#8b5cf6" />
+              <animateTransform
+                attributeName="gradientTransform"
+                className="dashboard-card__ribbon-gradient-motion"
+                dur="38s"
+                repeatCount="indefinite"
+                type="rotate"
+                values="-2 0.5 0.5; 2 0.5 0.5; -2 0.5 0.5"
+              />
+            </linearGradient>
+            <linearGradient id="dashboard-ribbon-blue" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#a5b4fc" />
+              <stop offset="55%" stopColor="#818cf8" />
+              <stop offset="100%" stopColor="#6366f1" />
+              <animateTransform
+                attributeName="gradientTransform"
+                className="dashboard-card__ribbon-gradient-motion"
+                dur="42s"
+                repeatCount="indefinite"
+                type="rotate"
+                values="2 0.5 0.5; -2 0.5 0.5; 2 0.5 0.5"
+              />
+            </linearGradient>
+          </defs>
+
+          <path
+            d="M-260 -120 C40 40 80 250 240 470 C390 680 430 820 540 1020 L160 1020 C100 800 30 650 -100 450 C-220 250 -300 80 -260 -120 Z"
+            fill="url(#dashboard-ribbon-orange)"
+          />
+          <path
+            d="M-80 -130 C250 50 310 260 470 500 C610 730 650 850 760 1030 L500 1030 C420 820 340 660 230 480 C100 270 20 90 -80 -130 Z"
+            fill="url(#dashboard-ribbon-pink)"
+          />
+          <path
+            d="M80 -120 C390 80 480 270 610 500 C760 760 790 880 900 1020 L670 1020 C560 790 500 650 390 460 C260 240 180 100 80 -120 Z"
+            fill="url(#dashboard-ribbon-violet)"
+          />
+          <path
+            d="M280 -120 C560 80 660 290 790 500 C930 730 990 870 1100 1020 L900 1020 C780 780 700 650 590 450 C450 210 380 80 280 -120 Z"
+            fill="url(#dashboard-ribbon-blue)"
+          />
+
+          <path
+            className="dashboard-card__ribbon-highlight"
+            d="M-40 -40 C180 160 180 300 350 520 C470 680 510 820 560 930"
+            fill="none"
+          />
+          <path
+            className="dashboard-card__ribbon-highlight"
+            d="M170 -40 C400 170 410 310 560 530 C670 700 720 820 770 930"
+            fill="none"
+          />
+          <path
+            className="dashboard-card__ribbon-highlight"
+            d="M400 -40 C600 160 640 320 770 530 C850 670 920 820 960 930"
+            fill="none"
+          />
+          <path
+            className="dashboard-card__ribbon-wave-line"
+            d="M-40 -40 C180 160 180 300 350 520 C470 680 510 820 560 930"
+            fill="none"
+          />
+          <path
+            className="dashboard-card__ribbon-wave-line"
+            d="M170 -40 C400 170 410 310 560 530 C670 700 720 820 770 930"
+            fill="none"
+          />
+          <path
+            className="dashboard-card__ribbon-wave-line"
+            d="M400 -40 C600 160 640 320 770 530 C850 670 920 820 960 930"
+            fill="none"
+          />
+        </svg>
+        <span className="dashboard-card__stripe-sheen" />
       </div>
       <div className="absolute inset-0 bg-white/0" />
 
