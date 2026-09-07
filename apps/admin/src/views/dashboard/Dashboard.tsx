@@ -3,7 +3,7 @@ import DashboardBalances from './component/DashboardBalances';
 import DashboardDatePicker from './component/DashboardDatePicker';
 import DashboardStatusList from './component/DashboardStatusList';
 import { formatDashboardDateRange, getDashboardDateSelection } from '@helpers/dashboardDateRange';
-import './component/Dashboardcard.css';
+import '@styles/DashboardCard.css';
 
 export default function Dashboard() {
   const [selectedDates, setSelectedDates] = useState(getDashboardDateSelection);
