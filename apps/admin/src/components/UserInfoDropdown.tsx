@@ -35,11 +35,7 @@ export function UserInfoDropdown() {
           className="flex items-center gap-2 rounded-full p-1 text-left hover:bg-slate-100"
         >
           {userInfo?.image ? (
-            <img
-              src={userInfo.image}
-              alt=""
-              className="size-10 rounded-full object-cover ring-2 ring-orange-100"
-            />
+            <img src={userInfo.image} alt="" className="size-10 rounded-full object-cover" />
           ) : (
             <span className="flex size-10 items-center justify-center rounded-full bg-orange-200 text-sm font-semibold text-orange-900 ring-2 ring-orange-100">
               {initials}

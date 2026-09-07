@@ -20,10 +20,10 @@ export default function DashboardStatusTile({
 
   return (
     <div
-      className={`w-full max-w-80 rounded-xl border p-3 transition-[transform,box-shadow] duration-200 ease-out motion-safe:animate-[dashboard-row-enter_550ms_var(--row-delay)_var(--dashboard-motion-ease)_both] ${
+      className={`w-full max-w-80 rounded-lg border p-3 transition-[transform,box-shadow] duration-200 ease-out motion-safe:animate-[dashboard-row-enter_550ms_var(--row-delay)_var(--dashboard-motion-ease)_both] ${
         isActive
-          ? 'bg-linear-to-br border-transparent from-[#061a35] via-[#0b3f77] to-[#1677a8] text-slate-50 '
-          : 'border-slate-200 bg-white text-slate-950 '
+          ? 'bg-linear-to-br border-transparent from-[#061a35] via-[#0b3f77] to-[#1677a8] text-slate-50'
+          : 'border-slate-200 bg-white text-slate-950'
       }`}
       style={{ '--row-delay': rowDelay } as CSSProperties}
     >

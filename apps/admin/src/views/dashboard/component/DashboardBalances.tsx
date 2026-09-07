@@ -69,7 +69,7 @@ export default function DashboardBalances() {
   );
 
   return (
-    <div className="min-h-full rounded-3xl border border-slate-200 bg-white/90 p-5 text-slate-950 shadow-[0_18px_40px_-28px_rgba(15,23,42,0.42)] sm:p-6">
+    <div className="min-h-full rounded-lg border border-slate-200 bg-white p-5 text-slate-950 sm:p-6">
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-[1.65rem] font-medium tracking-[-0.035em]">Income summary</p>
