@@ -1,5 +1,5 @@
 import { useDashboardQuery } from '../hooks/useDashboardQuery';
-import type { DashboardDateRange } from '../hooks/dashboardDateRange';
+import type { DashboardDateRange } from '@helpers/dashboardDateRange';
 import DashboardStatusListLoading from './DashboardStatusListLoading';
 import DashboardStatusTile from './DashboardStatusTile';
 

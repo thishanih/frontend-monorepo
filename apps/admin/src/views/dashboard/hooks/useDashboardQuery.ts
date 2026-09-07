@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { GetOrderStatusCountApi } from '@my-monorepo/api-client/services/dashboard.service';
-import type { DashboardDateRange } from './dashboardDateRange';
+import type { DashboardDateRange } from '@helpers/dashboardDateRange';
 
 export interface DashboardStatusCount {
   label: string;

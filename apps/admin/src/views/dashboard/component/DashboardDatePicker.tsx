@@ -5,7 +5,7 @@ import { Calendar, type DateRange, Popover, PopoverContent, PopoverTrigger } fro
 import {
   getDashboardDateRangeValidationError,
   type DashboardDateSelection,
-} from '../hooks/dashboardDateRange';
+} from '@helpers/dashboardDateRange';
 
 interface DashboardDatePickerProps {
   value: DashboardDateSelection;

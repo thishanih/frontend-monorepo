@@ -2,7 +2,7 @@ import { useState } from 'react';
 import DashboardBalances from './component/DashboardBalances';
 import DashboardDatePicker from './component/DashboardDatePicker';
 import DashboardStatusList from './component/DashboardStatusList';
-import { formatDashboardDateRange, getDashboardDateSelection } from './hooks/dashboardDateRange';
+import { formatDashboardDateRange, getDashboardDateSelection } from '@helpers/dashboardDateRange';
 import './component/Dashboardcard.css';
 
 export default function Dashboard() {

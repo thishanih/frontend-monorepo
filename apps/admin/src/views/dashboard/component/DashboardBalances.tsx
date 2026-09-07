@@ -1,6 +1,6 @@
 import { CircleDollarSign } from 'lucide-react';
 import { Progress } from '@my-monorepo/ui';
-import type { DashboardDateRange } from '../hooks/dashboardDateRange';
+import type { DashboardDateRange } from '@helpers/dashboardDateRange';
 import { useDashboardBalancesQuery } from '../hooks/useDashboardBalancesQuery';
 
 const currencyFormatter = new Intl.NumberFormat('en-US', {
