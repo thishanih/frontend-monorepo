@@ -1,9 +1,14 @@
 import { useDashboardQuery } from '../hooks/useDashboardQuery';
+import type { DashboardDateRange } from '../hooks/dashboardDateRange';
 import DashboardStatusListLoading from './DashboardStatusListLoading';
 import DashboardStatusTile from './DashboardStatusTile';
 
-export default function DashboardStatusList() {
-  const { data: statusCounts = [], isLoading, isError, refetch } = useDashboardQuery();
+interface DashboardStatusListProps {
+  dateRange: DashboardDateRange;
+}
+
+export default function DashboardStatusList({ dateRange }: DashboardStatusListProps) {
+  const { data: statusCounts = [], isLoading, isError, refetch } = useDashboardQuery(dateRange);
 
   if (isLoading) {
     return <DashboardStatusListLoading />;

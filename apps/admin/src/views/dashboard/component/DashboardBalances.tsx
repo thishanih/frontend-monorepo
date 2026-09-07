@@ -1,5 +1,6 @@
 import { CircleDollarSign } from 'lucide-react';
 import { Progress } from '@my-monorepo/ui';
+import type { DashboardDateRange } from '../hooks/dashboardDateRange';
 import { useDashboardBalancesQuery } from '../hooks/useDashboardBalancesQuery';
 
 const currencyFormatter = new Intl.NumberFormat('en-US', {
@@ -19,14 +20,18 @@ const formatCurrency = (value: number) => currencyFormatter.format(value);
 const formatDateRange = (startDate: string, endDate: string) =>
   `${dateFormatter.format(new Date(startDate))} - ${dateFormatter.format(new Date(endDate))}`;
 
-export default function DashboardBalances() {
+interface DashboardBalancesProps {
+  dateRange: DashboardDateRange;
+}
+
+export default function DashboardBalances({ dateRange }: DashboardBalancesProps) {
   const {
     data: incomeSummary,
     isError,
     isLoading,
     isRefetching,
     refetch,
-  } = useDashboardBalancesQuery();
+  } = useDashboardBalancesQuery(dateRange);
 
   if (isLoading) {
     return <DashboardBalancesLoading />;
