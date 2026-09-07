@@ -1,7 +1,6 @@
-import type { CSSProperties } from 'react';
-import { ArrowUpRight, TrendingUp } from 'lucide-react';
 import { useDashboardQuery } from '../hooks/useDashboardQuery';
 import DashboardStatusListLoading from './DashboardStatusListLoading';
+import DashboardStatusTile from './DashboardStatusTile';
 
 export default function DashboardStatusList() {
   const { data: statusCounts = [], isLoading, isError, refetch } = useDashboardQuery();
@@ -34,30 +33,17 @@ export default function DashboardStatusList() {
   }
 
   return (
-    <div className="mt-6 grid gap-3 sm:grid-cols-2">
+    <div className="mt-6 grid justify-start gap-2 sm:grid-cols-[repeat(2,minmax(0,15rem))]">
       {statusCounts.map((item, index) => {
         const isProcessing = item.label.toLowerCase() === 'processing';
-
         return (
-          <div
-            className={`dashboard-status-tile ${isProcessing ? 'dashboard-status-tile--active' : ''}`}
+          <DashboardStatusTile
+            count={item.count}
             key={item.label}
-            style={{ '--row-delay': `${index * 90}ms` } as CSSProperties}
-          >
-            <div className="flex items-start justify-between gap-3">
-              <p className="text-base font-medium tracking-tight">{item.label} Orders</p>
-              <span className="dashboard-status-tile__arrow" aria-hidden="true">
-                <ArrowUpRight size={18} />
-              </span>
-            </div>
-            <p className="mt-6 text-4xl font-medium tracking-[-0.07em]">
-              {item.count.toLocaleString()}
-            </p>
-            <div className="mt-4 flex items-center gap-2 text-xs opacity-75">
-              <TrendingUp size={15} />
-              <span>Current order status</span>
-            </div>
-          </div>
+            label={item.label}
+            rowDelay={`${index * 90}ms`}
+            tone={isProcessing ? 'active' : 'default'}
+          />
         );
       })}
     </div>

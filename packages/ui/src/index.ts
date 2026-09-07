@@ -4,4 +4,5 @@ export * from './components/dropdown-menu';
 export * from './components/input';
 export * from './components/label';
 export * from './components/navigation-menu';
+export * from './components/progress';
 export * from './lib/utils';

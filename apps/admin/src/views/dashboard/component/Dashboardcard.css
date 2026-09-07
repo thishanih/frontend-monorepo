@@ -1,14 +1,4 @@
 :root {
-  --dashboard-border: #e2e8f0;
-  --dashboard-surface: #ffffff;
-  --dashboard-ink: #0f172a;
-  --dashboard-active-start: #061a35;
-  --dashboard-active-mid: #0b3f77;
-  --dashboard-active-end: #1677a8;
-  --dashboard-active-ink: #f8fafc;
-  --dashboard-active-control: #ffffff;
-  --dashboard-tile-radius: 1.25rem;
-  --dashboard-tile-padding: 1rem;
   --dashboard-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -237,65 +227,6 @@
   animation: dashboard-content-enter 800ms 80ms var(--dashboard-motion-ease) both;
 }
 
-.dashboard-status-tile {
-  animation: dashboard-row-enter 550ms var(--row-delay) var(--dashboard-motion-ease) both;
-  border: 1px solid var(--dashboard-border);
-  border-radius: var(--dashboard-tile-radius);
-  background: var(--dashboard-surface);
-  color: var(--dashboard-ink);
-  padding: var(--dashboard-tile-padding);
-  transition:
-    transform 220ms ease,
-    box-shadow 220ms ease;
-}
-
-.dashboard-status-tile:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 16px 30px -22px rgba(15, 23, 42, 0.55);
-}
-
-.dashboard-status-tile--active {
-  border-color: transparent;
-  background:
-    radial-gradient(circle at 88% -20%, rgba(255, 255, 255, 0.2), transparent 34%),
-    linear-gradient(
-      135deg,
-      var(--dashboard-active-start),
-      var(--dashboard-active-mid) 52%,
-      var(--dashboard-active-end)
-    );
-  color: var(--dashboard-active-ink);
-  box-shadow:
-    0 20px 36px -26px rgba(3, 37, 78, 0.9),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16);
-}
-
-.dashboard-status-tile__arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  flex-shrink: 0;
-  border: 1px solid currentColor;
-  border-radius: 9999px;
-}
-
-.dashboard-status-tile--active .dashboard-status-tile__arrow {
-  background: var(--dashboard-active-control);
-  color: var(--dashboard-ink);
-}
-
-.dashboard-status-tile--active:hover {
-  box-shadow:
-    0 24px 42px -24px rgba(3, 37, 78, 0.95),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-.dashboard-card__row {
-  animation: dashboard-row-enter 550ms var(--row-delay) var(--dashboard-motion-ease) both;
-}
-
 @keyframes dashboard-card-enter {
   from {
     opacity: 0;
@@ -440,9 +371,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .dashboard-card,
-  .dashboard-card__content,
-  .dashboard-card__row,
-  .dashboard-status-tile {
+  .dashboard-card__content {
     animation: none;
   }
 
@@ -471,9 +400,5 @@
 
   .dashboard-card__aurora::before {
     animation: none;
-  }
-
-  .dashboard-status-tile:hover {
-    transform: none;
   }
 }
