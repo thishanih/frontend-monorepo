@@ -1,0 +1,9 @@
+{
+  "extends": "@my-monorepo/typescript-config/vite.json",
+  "compilerOptions": {
+    "types": ["vite/client"],
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": ["src"]
+}

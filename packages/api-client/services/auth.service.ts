@@ -10,9 +10,14 @@ import type {
 } from '../../types/auth.interface';
 import axiosInstance from '../client';
 import type { ApiResponse } from '../../types/common.interface';
+import { PUBLIC_API_KEY } from '@my-monorepo/utils/config';
 
 export const LoginApi = async (payload: LoginPayload) => {
-  const res = await axiosInstance.post<ApiResponse<LoginResponseData>>(`/auth/login`, payload);
+  const res = await axiosInstance.post<ApiResponse<LoginResponseData>>(`/auth/login`, payload, {
+    headers: {
+      'x-api-key': PUBLIC_API_KEY,
+    },
+  });
   return res;
 };
 
