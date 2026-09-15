@@ -42,6 +42,7 @@ export const getDashboardDateRangeValidationError = (
   const start = moment(from).startOf('day');
   const end = moment(to).startOf('day');
   const latestDate = today.clone().startOf('day');
+  const earliestDate = latestDate.clone().subtract(1, 'year');
 
   if (!start.isValid() || !end.isValid()) {
     return 'Choose valid start and end dates.';
@@ -49,6 +50,10 @@ export const getDashboardDateRangeValidationError = (
 
   if (start.isAfter(latestDate) || end.isAfter(latestDate)) {
     return 'Dates cannot be in the future.';
+  }
+
+  if (start.isBefore(earliestDate) || end.isBefore(earliestDate)) {
+    return 'Dates cannot be more than one year in the past.';
   }
 
   if (end.isBefore(start)) {

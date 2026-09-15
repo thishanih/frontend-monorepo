@@ -19,6 +19,7 @@ export default function DashboardDatePicker({ value, onChange }: DashboardDatePi
   const [draftRange, setDraftRange] = useState<DateRange>(value);
   const [error, setError] = useState<string>();
   const today = moment().startOf('day');
+  const earliestDate = today.clone().subtract(1, 'year');
 
   const handleOpenChange = (nextOpen: boolean) => {
     setOpen(nextOpen);
@@ -50,7 +51,9 @@ export default function DashboardDatePicker({ value, onChange }: DashboardDatePi
   };
 
   const handleDayDisabled = (date: Date) => {
-    if (moment(date).isAfter(today, 'day')) {
+    const candidateDate = moment(date);
+
+    if (candidateDate.isBefore(earliestDate, 'day') || candidateDate.isAfter(today, 'day')) {
       return true;
     }
 
