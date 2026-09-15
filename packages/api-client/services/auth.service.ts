@@ -42,10 +42,8 @@ export const ResetPasswordApi = async (resetPayload: ResetPasswordPayload) => {
 };
 
 export const RefreshTokenApi = async (refresh_token: string) => {
-  const res = await axiosInstance.get<ApiResponse<RefreshTokenRes>>(`/auth/refresh-token`, {
-    headers: {
-      Authorization: `Bearer ${refresh_token}`,
-    },
+  const res = await axiosInstance.post<ApiResponse<RefreshTokenRes>>(`/auth/refresh-token`, {
+    refresh_token,
   });
   return res;
 };
