@@ -1,5 +1,5 @@
 import { CircleDollarSign } from 'lucide-react';
-import { Progress } from '@my-monorepo/ui';
+import { DataState, Progress } from '@my-monorepo/ui';
 import type { DashboardDateRange } from '@helpers/dashboardDateRange';
 import { useDashboardBalancesQuery } from '../hooks/useDashboardBalancesQuery';
 
@@ -39,20 +39,16 @@ export default function DashboardBalances({ dateRange }: DashboardBalancesProps)
 
   if (isError) {
     return (
-      <div
-        className="min-h-full rounded-3xl border border-red-200 bg-white p-5 text-slate-950 shadow-[0_18px_40px_-28px_rgba(15,23,42,0.42)] sm:p-6"
-        role="alert"
-      >
-        <p className="text-xl font-medium tracking-tight text-red-800">Income summary</p>
-        <p className="mt-2 text-sm text-red-700">Unable to load income data.</p>
-        <button
-          className="mt-5 rounded-lg bg-red-800 px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-red-900 disabled:cursor-not-allowed disabled:opacity-60"
-          disabled={isRefetching}
-          onClick={() => refetch()}
-          type="button"
-        >
-          {isRefetching ? 'Retrying...' : 'Try again'}
-        </button>
+      <div className="min-h-full rounded-3xl border border-red-200 bg-white p-5 text-slate-950 shadow-[0_18px_40px_-28px_rgba(15,23,42,0.42)] sm:p-6">
+        <DataState
+          className="min-h-48 gap-3"
+          description="Unable to load income data."
+          icon={<CircleDollarSign />}
+          isRetrying={isRefetching}
+          onRetry={() => refetch()}
+          title="Income summary"
+          variant="error"
+        />
       </div>
     );
   }
@@ -63,8 +59,12 @@ export default function DashboardBalances({ dateRange }: DashboardBalancesProps)
         className="min-h-full rounded-3xl border border-slate-200 bg-white p-5 text-slate-950 shadow-[0_18px_40px_-28px_rgba(15,23,42,0.42)] sm:p-6"
         role="status"
       >
-        <p className="text-xl font-medium tracking-tight text-slate-950">Income summary</p>
-        <p className="mt-2 text-sm text-slate-500">No income data is available yet.</p>
+        <DataState
+          className="min-h-32 gap-3"
+          description="No income data is available yet."
+          icon={<CircleDollarSign />}
+          title="Income summary"
+        />
       </div>
     );
   }

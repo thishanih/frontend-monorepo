@@ -32,6 +32,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { GetCookie } from '@my-monorepo/utils/cookies';
 import { REFRESH_TOKEN } from '@my-monorepo/utils/enum';
+import { RetryButton } from '@my-monorepo/ui';
 import { useAppStore } from '../store';
 
 const isTokenExpired = (token: string) => {
@@ -69,9 +70,12 @@ const ProtectRoute = () => {
     return (
       <div className="flex h-screen w-screen flex-col items-center justify-center gap-4">
         <p className="text-secondary-text text-base font-medium">{error}</p>
-        <button type="button" className="text-primary underline" onClick={retryUserInfo}>
-          Retry
-        </button>
+        <RetryButton
+          className="text-primary text-sm underline"
+          onClick={retryUserInfo}
+          size="sm"
+          variant="ghost"
+        />
       </div>
     );
   }

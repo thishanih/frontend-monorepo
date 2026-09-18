@@ -1,3 +1,4 @@
+import { Empty, EmptyDescription, EmptyHeader, EmptyTitle, RetryButton } from '@my-monorepo/ui';
 import { useDashboardQuery } from '../hooks/useDashboardQuery';
 import type { DashboardDateRange } from '@helpers/dashboardDateRange';
 import DashboardStatusListLoading from './DashboardStatusListLoading';
@@ -18,13 +19,12 @@ export default function DashboardStatusList({ dateRange }: DashboardStatusListPr
     return (
       <div className="mt-6 rounded-2xl border border-red-200 bg-red-50 p-6 text-red-700">
         <p className="text-sm">Unable to load order status data.</p>
-        <button
-          className="mt-3 text-sm font-semibold underline underline-offset-4"
+        <RetryButton
+          className="mt-3 text-sm underline underline-offset-4"
+          size="sm"
+          variant="ghost"
           onClick={() => refetch()}
-          type="button"
-        >
-          Try again
-        </button>
+        />
       </div>
     );
   }
@@ -32,7 +32,12 @@ export default function DashboardStatusList({ dateRange }: DashboardStatusListPr
   if (statusCounts.length === 0) {
     return (
       <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <p className="text-sm text-slate-500">No order status data is available yet.</p>
+        <Empty className="min-h-20 gap-2">
+          <EmptyHeader>
+            <EmptyTitle className="text-base">No order status data</EmptyTitle>
+            <EmptyDescription>No order status data is available yet.</EmptyDescription>
+          </EmptyHeader>
+        </Empty>
       </div>
     );
   }

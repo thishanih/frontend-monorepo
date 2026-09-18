@@ -1,6 +1,6 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
-import { RefreshCw, TriangleAlert } from 'lucide-react';
-import { Button } from '@my-monorepo/ui';
+import { TriangleAlert } from 'lucide-react';
+import { RetryButton } from '@my-monorepo/ui';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -40,10 +40,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
           <p className="mt-2 text-sm leading-6 text-neutral-500">
             We could not load this page. Please try again.
           </p>
-          <Button className="mt-6" tone="brand" onClick={this.handleRetry}>
-            <RefreshCw size={16} aria-hidden="true" />
-            Try again
-          </Button>
+          <RetryButton className="mt-6" onClick={this.handleRetry} />
         </section>
       </main>
     );
