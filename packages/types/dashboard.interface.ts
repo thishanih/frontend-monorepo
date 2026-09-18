@@ -24,3 +24,26 @@ export interface IncomeSummaryParams {
   startDate: string;
   endDate: string;
 }
+
+export interface OrderPerformanceChartPoint {
+  date: string;
+  orderCount: number;
+  totalOrderAmount: number;
+  paymentSummary: {
+    Online: number;
+    Cash: number;
+  };
+}
+
+export interface OrderPerformanceChartData {
+  data: OrderPerformanceChartPoint[];
+  dataRange: {
+    startDate: string;
+    endDate: string;
+  };
+}
+
+export interface OrderPerformanceChartParams {
+  startDate: string;
+  endDate: string;
+}

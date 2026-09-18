@@ -1,6 +1,8 @@
 import type {
   IncomeSummaryData,
   IncomeSummaryParams,
+  OrderPerformanceChartData,
+  OrderPerformanceChartParams,
   OrderStatusCountData,
   OrderStatusCountParams,
 } from '../../types/dashboard.interface';
@@ -10,6 +12,8 @@ import axiosInstance from '../client';
 export type {
   IncomeSummaryData,
   IncomeSummaryParams,
+  OrderPerformanceChartData,
+  OrderPerformanceChartParams,
   OrderStatusCountData,
   OrderStatusCountParams,
 } from '../../types/dashboard.interface';
@@ -25,4 +29,11 @@ export const GetIncomeSummaryApi = async (params: IncomeSummaryParams) => {
   return axiosInstance.get<ApiResponse<IncomeSummaryData>>('/dashboard/admin/income-summary', {
     params,
   });
+};
+
+export const GetOrderPerformanceChartApi = async (params: OrderPerformanceChartParams) => {
+  return axiosInstance.get<ApiResponse<OrderPerformanceChartData>>(
+    '/dashboard/admin/order-performance-chart',
+    { params },
+  );
 };

@@ -17,6 +17,11 @@ export const getDashboardDateRange = (today = moment()): DashboardDateRange => (
   endDate: today.clone().format(dashboardDateFormat),
 });
 
+export const getDashboardCurrentMonthDateRange = (today = moment()): DashboardDateRange => ({
+  startDate: today.clone().startOf('month').format(dashboardDateFormat),
+  endDate: today.clone().format(dashboardDateFormat),
+});
+
 export const getDashboardDateSelection = (today = moment()): DashboardDateSelection => ({
   from: today.clone().startOf('year').toDate(),
   to: today.clone().endOf('day').toDate(),

@@ -1,6 +1,7 @@
 export * from './components/button';
 export * from './components/calendar';
 export * from './components/carousel';
+export * from './components/chart';
 export * from './components/dropdown-menu';
 export * from './components/empty';
 export * from './components/data-state';

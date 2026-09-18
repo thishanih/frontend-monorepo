@@ -1,9 +1,15 @@
 @keyframes gradientAnimation {
-  50% {
-    background-position: 100% 20%;
+  0% {
+    background-position: 0% 100%;
+  }
+  25% {
+    background-position: 60% 40%;
   }
   50% {
-    background-position: 100% 20%;
+    background-position: 100% 80%;
+  }
+  75% {
+    background-position: 40% 20%;
   }
   100% {
     background-position: 0% 100%;
@@ -11,30 +17,22 @@
 }
 
 .StripeHomepageHeroGradient {
-  animation: gradientAnimation 5s linear infinite;
+  animation: gradientAnimation 18s ease-in-out infinite;
+  animation-play-state: running;
   width: 100%;
   height: 800px;
-  --gradientColorZero: #a960ee;
-  --gradientColorOne: #ff333d;
-  --gradientColorTwo: #90e0ff;
-  --gradientColorThree: #ffcb57;
-  --gradientColorZeroTransparent: rgba(169, 96, 238, 0);
-  --gradientColorOneTransparent: rgba(255, 51, 61, 0);
-  --gradientColorTwoTransparent: rgba(144, 224, 255, 0);
-  --gradientColorThreeTransparent: rgba(255, 203, 87, 0);
-  --gradientAngle: var(--angleStrong);
-  --gradientHeight: calc(
-    100% + var(--sectionPaddingTop) + var(--transformOriginX) * var(--sectionAngleSin)
-  );
-  --offsetX: var(--gutterWidth);
-  --transformOriginX: -60px;
-  --sectionAngleSin: var(--angleStrongSin);
+  --gradientColorZero: #60a5fa;
+  --gradientColorOne: #38bdf8;
+  --gradientColorTwo: #14b8a6;
+  --gradientColorThree: #bfdbfe;
+  --gradientColorZeroTransparent: rgba(96, 165, 250, 0);
+  --gradientColorOneTransparent: rgba(56, 189, 248, 0);
+  --gradientColorTwoTransparent: rgba(20, 184, 166, 0);
+  --gradientColorThreeTransparent: rgba(191, 219, 254, 0);
   position: absolute;
   bottom: 0;
   top: auto;
-  left: calc(var(--offsetX) * -1);
-  /*transform-origin: var(--transformOriginX) 100%;*/
-  transform: skewY(-12deg);
+  left: 0;
   overflow: hidden;
   border: none;
 
@@ -59,5 +57,13 @@
     radial-gradient(var(--gradientColorTwo) 25%, var(--gradientColorTwoTransparent) 50% 100%)
       520px -250px,
     var(--gradientColorZero);
+  background-size: 200% 200%;
   background-repeat: repeat-y;
+  will-change: background-position;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .StripeHomepageHeroGradient {
+    animation: none;
+  }
 }

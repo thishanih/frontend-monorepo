@@ -106,7 +106,7 @@ export function AppHeader() {
               <li key={item.label} className="relative z-0">
                 <Link
                   to={item.href}
-                  className="rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-medium text-white transition-colors"
+                  className="rounded-md bg-slate-800 px-4 py-2.5 text-sm font-medium text-white transition-colors"
                 >
                   {item.label === 'Dashboard' && <Grid2X2 className="mr-2 inline size-4" />}
                   {item.label}
@@ -126,7 +126,7 @@ export function AppHeader() {
                     setOpenSection((current) => (current === section.label ? '' : section.label))
                   }
                   aria-expanded={openSection === section.label}
-                  className={`inline-flex h-auto items-center rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
+                  className={`inline-flex h-auto items-center rounded-md px-4 py-2.5 text-sm font-medium transition-colors ${
                     openSection === section.label
                       ? 'bg-slate-100 text-slate-950'
                       : 'bg-transparent text-slate-500 hover:bg-slate-100 hover:text-slate-950'
@@ -142,13 +142,13 @@ export function AppHeader() {
                 </button>
                 {openSection === section.label && (
                   <div className="absolute left-0 top-full z-50 w-[min(600px,calc(100vw-2rem))] pt-3">
-                    <div className="rounded-xl border border-slate-200 bg-white p-2 shadow-lg">
+                    <div className="rounded-lg border border-slate-100 bg-white p-2 shadow-lg">
                       <div className="grid gap-1 sm:grid-cols-2">
                         {section.items.map((item) => (
                           <Link
                             key={item.label}
                             to={item.href}
-                            className="flex flex-col gap-1 rounded-lg px-3 py-2.5 text-sm transition-colors hover:bg-slate-100"
+                            className="flex flex-col gap-1 rounded-md px-3 py-2.5 text-sm transition-colors hover:bg-slate-100"
                           >
                             <span className="font-medium leading-none text-slate-950">
                               {item.label}
