@@ -34,7 +34,7 @@ export default function Dashboard() {
         </div>
       </section>
 
-      <div className="mt-8">
+      <div className="flex w-full justify-center">
         <DashboardOrderPerformanceChart />
       </div>
     </>

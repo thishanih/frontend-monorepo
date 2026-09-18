@@ -47,3 +47,22 @@ export interface OrderPerformanceChartParams {
   startDate: string;
   endDate: string;
 }
+
+export interface ProductSaleData {
+  data: ProductSalePoint[];
+  dataRange: {
+    startDate: string;
+    endDate: string;
+  };
+}
+
+export interface ProductSalePoint {
+  productCode: string;
+  productName: string;
+  qty: number;
+}
+
+export interface ProductSaleParams {
+  startDate: string;
+  endDate: string;
+}

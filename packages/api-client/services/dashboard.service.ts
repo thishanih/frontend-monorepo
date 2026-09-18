@@ -5,6 +5,8 @@ import type {
   OrderPerformanceChartParams,
   OrderStatusCountData,
   OrderStatusCountParams,
+  ProductSaleData,
+  ProductSaleParams,
 } from '../../types/dashboard.interface';
 import type { ApiResponse } from '../../types/common.interface';
 import axiosInstance from '../client';
@@ -16,6 +18,8 @@ export type {
   OrderPerformanceChartParams,
   OrderStatusCountData,
   OrderStatusCountParams,
+  ProductSaleData,
+  ProductSaleParams,
 } from '../../types/dashboard.interface';
 
 export const GetOrderStatusCountApi = async (params: OrderStatusCountParams) => {
@@ -36,4 +40,10 @@ export const GetOrderPerformanceChartApi = async (params: OrderPerformanceChartP
     '/dashboard/admin/order-performance-chart',
     { params },
   );
+};
+
+export const GetProductSaleApi = async (params: ProductSaleParams) => {
+  return axiosInstance.get<ApiResponse<ProductSaleData>>('/dashboard/admin/product-sale', {
+    params,
+  });
 };
