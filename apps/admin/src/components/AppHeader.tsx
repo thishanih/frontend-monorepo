@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Bell, ChevronDown, Grid2X2, Settings } from 'lucide-react';
+import { Bell, ChevronDown, Menu, Settings, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { MainLogo } from '@my-monorepo/utils/images';
 import { UserInfoDropdown } from './UserInfoDropdown';
@@ -74,12 +74,14 @@ const subNavigation = [
 
 export function AppHeader() {
   const [openSection, setOpenSection] = useState('');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handlePointerDown = (event: PointerEvent) => {
       if (!headerRef.current?.contains(event.target as Node)) {
         setOpenSection('');
+        setMobileMenuOpen(false);
       }
     };
 
@@ -90,15 +92,19 @@ export function AppHeader() {
   return (
     <header
       ref={headerRef}
-      className="sticky top-0 z-30 flex h-20 items-center border-b border-slate-200 bg-white/95 px-4 backdrop-blur sm:px-6 lg:px-10"
+      className="sticky top-0 z-30 flex min-h-16 w-full items-center rounded-none border border-white/70 bg-white/65 px-2 py-2 backdrop-blur-2xl backdrop-saturate-150 sm:mx-5 sm:w-auto sm:rounded-2xl sm:px-5 sm:py-0 lg:mx-8 lg:px-7"
     >
-      <div className="flex min-w-0 flex-1 items-center gap-3">
-        <Link to="/dashboard" className="flex shrink-0 items-center gap-3 text-slate-950">
-          <img src={MainLogo} alt="Steadi" className="size-10 object-contain" />
-          <span className="hidden text-xl font-semibold tracking-tight sm:inline">Steadi</span>
+      <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-3">
+        <Link to="/dashboard" className="flex shrink-0 items-center gap-2 text-slate-950 sm:gap-3">
+          <span className="flex size-10 items-center justify-center rounded-xl border border-white/80 bg-white/70 shadow-sm">
+            <img src={MainLogo} alt="Steadi" className="size-8 object-contain" />
+          </span>
+          <span className="hidden text-lg font-semibold tracking-tight text-slate-950 sm:inline">
+            Steadi
+          </span>
         </Link>
         <nav
-          className="scrollbar-none ml-3 min-w-0 flex-1 justify-start overflow-x-auto sm:ml-5 sm:overflow-visible [&::-webkit-scrollbar]:hidden"
+          className="scrollbar-none ml-1 hidden min-w-0 flex-1 justify-start overflow-x-auto sm:ml-5 sm:flex sm:overflow-visible [&::-webkit-scrollbar]:hidden"
           aria-label="Header navigation"
         >
           <ul className="flex w-max shrink-0 list-none items-center justify-start gap-x-2.5 space-x-0">
@@ -106,9 +112,8 @@ export function AppHeader() {
               <li key={item.label} className="relative z-0">
                 <Link
                   to={item.href}
-                  className="rounded-md bg-slate-800 px-4 py-2.5 text-sm font-medium text-white transition-colors"
+                  className="inline-flex items-center rounded-xl bg-slate-950 px-3 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-slate-800 sm:px-3.5"
                 >
-                  {item.label === 'Dashboard' && <Grid2X2 className="mr-2 inline size-4" />}
                   {item.label}
                 </Link>
               </li>
@@ -126,10 +131,10 @@ export function AppHeader() {
                     setOpenSection((current) => (current === section.label ? '' : section.label))
                   }
                   aria-expanded={openSection === section.label}
-                  className={`inline-flex h-auto items-center rounded-md px-4 py-2.5 text-sm font-medium transition-colors ${
+                  className={`inline-flex h-auto items-center rounded-md px-2.5 py-2 text-sm font-medium transition-colors sm:px-4 sm:py-2.5 ${
                     openSection === section.label
-                      ? 'bg-slate-100 text-slate-950'
-                      : 'bg-transparent text-slate-500 hover:bg-slate-100 hover:text-slate-950'
+                      ? 'bg-white/85 text-slate-950 shadow-sm'
+                      : 'bg-transparent text-slate-600 hover:bg-white/60 hover:text-slate-950'
                   }`}
                 >
                   {section.label}
@@ -142,13 +147,13 @@ export function AppHeader() {
                 </button>
                 {openSection === section.label && (
                   <div className="absolute left-0 top-full z-50 w-[min(600px,calc(100vw-2rem))] pt-3">
-                    <div className="rounded-lg border border-slate-100 bg-white p-2 shadow-lg">
+                    <div className="rounded-2xl border border-white/80 bg-white/80 p-2 shadow-[0_18px_45px_-18px_rgba(15,23,42,0.5)] backdrop-blur-2xl">
                       <div className="grid gap-1 sm:grid-cols-2">
                         {section.items.map((item) => (
                           <Link
                             key={item.label}
                             to={item.href}
-                            className="flex flex-col gap-1 rounded-md px-3 py-2.5 text-sm transition-colors hover:bg-slate-100"
+                            className="flex flex-col gap-1 rounded-xl px-3 py-2.5 text-sm transition-colors hover:bg-white/80"
                           >
                             <span className="font-medium leading-none text-slate-950">
                               {item.label}
@@ -165,10 +170,19 @@ export function AppHeader() {
           </ul>
         </nav>
       </div>
-      <div className="flex items-center gap-1.5 sm:gap-3">
+      <div className="flex shrink-0 items-center gap-0.5 sm:gap-3">
         <button
           type="button"
-          className="relative rounded-full p-2.5 text-slate-700 hover:bg-slate-100"
+          className="rounded-xl p-2 text-slate-700 transition hover:bg-white/75 hover:text-slate-950 sm:hidden"
+          onClick={() => setMobileMenuOpen((current) => !current)}
+          aria-expanded={mobileMenuOpen}
+          aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        >
+          {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+        </button>
+        <button
+          type="button"
+          className="relative rounded-xl p-2 text-slate-700 transition hover:bg-white/75 hover:text-slate-950 sm:p-2.5"
           aria-label="Notifications"
         >
           <Bell className="size-5" />
@@ -176,20 +190,53 @@ export function AppHeader() {
         </button>
         <button
           type="button"
-          className="rounded-full p-2.5 text-slate-700 hover:bg-slate-100"
+          className="hidden rounded-xl p-2.5 text-slate-700 transition hover:bg-white/75 hover:text-slate-950 sm:block"
           aria-label="Settings"
         >
           <Settings className="size-5" />
         </button>
         <button
           type="button"
-          className="hidden rounded-full px-2.5 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 sm:block"
+          className="hidden rounded-xl px-2.5 py-2 text-sm font-medium text-slate-700 transition hover:bg-white/75 hover:text-slate-950 sm:block"
           aria-label="Change language"
         >
           EN
         </button>
         <UserInfoDropdown />
       </div>
+      {mobileMenuOpen && (
+        <nav
+          className="absolute left-2 right-2 top-[calc(100%+0.5rem)] rounded-2xl border border-white/80 bg-white/85 p-2 shadow-[0_18px_45px_-18px_rgba(15,23,42,0.35)] backdrop-blur-2xl sm:hidden"
+          aria-label="Mobile navigation"
+        >
+          <Link
+            to="/dashboard"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center rounded-xl bg-slate-950 px-3.5 py-3 text-sm font-medium text-white"
+          >
+            Dashboard
+          </Link>
+          <div className="mt-1 grid gap-1">
+            {subNavigation.map((section) => (
+              <div key={section.label} className="rounded-xl bg-white/55 p-1">
+                <p className="px-2.5 py-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                  {section.label}
+                </p>
+                {section.items.map((item) => (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex rounded-lg px-2.5 py-2 text-sm text-slate-700 transition hover:bg-white/80 hover:text-slate-950"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            ))}
+          </div>
+        </nav>
+      )}
     </header>
   );
 }
