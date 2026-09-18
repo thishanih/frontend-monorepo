@@ -51,6 +51,12 @@ export default function DashboardOrderPerformanceChart() {
   const orderPerformanceQuery = useDashboardOrderPerformanceQuery();
   const productSale = productSaleQuery.data;
   const performance = orderPerformanceQuery.data;
+  const performanceChartData =
+    performance?.data.map((item) => ({
+      cash: item.paymentSummary.Cash,
+      date: item.date,
+      online: item.paymentSummary.Online,
+    })) ?? [];
   const isLoading = productSaleQuery.isLoading || orderPerformanceQuery.isLoading;
   const isError = productSaleQuery.isError || orderPerformanceQuery.isError;
   const isRefetching = productSaleQuery.isRefetching || orderPerformanceQuery.isRefetching;
@@ -64,7 +70,7 @@ export default function DashboardOrderPerformanceChart() {
 
   if (isError) {
     return (
-      <div className="w-full rounded-lg border border-red-200 bg-white p-5 text-slate-950 sm:p-6">
+      <div className="flex w-full justify-center rounded-lg p-5 text-slate-950 sm:p-6">
         <DataState
           className="min-h-56 gap-3"
           description="Unable to load this month's dashboard charts."
@@ -79,10 +85,10 @@ export default function DashboardOrderPerformanceChart() {
   }
 
   return (
-    <div className="w-full rounded-lg border border-slate-200 bg-white p-5 text-slate-950 sm:p-6">
-      <div className="flex w-full flex-col items-center gap-1 text-center">
+    <div className="w-full rounded-lg p-5 text-slate-950 sm:p-6">
+      <div className="flex w-full flex-col gap-1">
         <div className="w-full">
-          <p className="text-3xl font-semibold tracking-[-0.035em]">
+          <p className="text-5xl font-semibold tracking-[-0.035em]">
             This month&apos;s product sales
           </p>
           <p className="mt-1 text-lg text-slate-500">
@@ -94,27 +100,30 @@ export default function DashboardOrderPerformanceChart() {
       </div>
 
       <div className="mt-10 grid items-start gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
-        <div className="flex min-w-0 flex-col items-center">
-          <p className="mb-3 text-base font-semibold text-slate-800">Product sales mix</p>
+        <div className="bg-linear-to-br flex min-w-0 flex-col rounded-md border-transparent from-sky-400 via-sky-100 to-sky-50 p-4 text-slate-50">
+          <p className="mb-1 text-xl font-semibold text-slate-800">Product sales mix</p>
+          <p className="mb-3 text-sm text-slate-600">Share of units sold by product.</p>
           {productSale?.data.length ? (
-            <ChartContainer className="h-72 w-full max-w-sm" config={chartConfig}>
-              <PieChart>
-                <ChartTooltip content={<ChartTooltipContent />} />
-                <Pie
-                  data={productSale.data}
-                  dataKey="qty"
-                  innerRadius="58%"
-                  nameKey="productName"
-                  outerRadius="82%"
-                  paddingAngle={2}
-                  strokeWidth={0}
-                >
-                  {productSale.data.map((item, index) => (
-                    <Cell fill={chartColors[index % chartColors.length]} key={item.productCode} />
-                  ))}
-                </Pie>
-              </PieChart>
-            </ChartContainer>
+            <div className="w-full max-w-sm rounded-2xl p-3">
+              <ChartContainer className="h-72 w-full" config={chartConfig}>
+                <PieChart>
+                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <Pie
+                    data={productSale.data}
+                    dataKey="qty"
+                    innerRadius="58%"
+                    nameKey="productName"
+                    outerRadius="82%"
+                    paddingAngle={2}
+                    strokeWidth={0}
+                  >
+                    {productSale.data.map((item, index) => (
+                      <Cell fill={chartColors[index % chartColors.length]} key={item.productCode} />
+                    ))}
+                  </Pie>
+                </PieChart>
+              </ChartContainer>
+            </div>
           ) : (
             <DataState
               className="min-h-56 gap-3"
@@ -126,10 +135,11 @@ export default function DashboardOrderPerformanceChart() {
         </div>
 
         <div className="min-w-0">
-          <p className="mb-3 text-base font-semibold text-slate-800">Daily order performance</p>
-          {performance?.data.length ? (
+          <p className="mb-1 text-xl font-semibold text-slate-800">Daily order performance</p>
+          <p className="mb-3 text-sm text-slate-500">Cash and online orders by day.</p>
+          {performanceChartData.length ? (
             <ChartContainer className="h-72" config={chartConfig}>
-              <BarChart data={performance.data} margin={{ left: 4, right: 4 }}>
+              <BarChart data={performanceChartData} margin={{ left: 4, right: 4 }}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   axisLine={false}
@@ -176,7 +186,7 @@ function DashboardOrderPerformanceChartLoading() {
       className="w-full rounded-lg border border-slate-200 bg-white p-5 text-slate-950 sm:p-6"
       role="status"
     >
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex items-end justify-between gap-3">
         <div className="space-y-2">
           <span className="block h-7 w-48 animate-pulse rounded-md bg-slate-200" />
           <span className="block h-3 w-56 animate-pulse rounded-md bg-slate-200" />
