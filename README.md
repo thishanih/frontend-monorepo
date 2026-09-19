@@ -2,6 +2,12 @@
 
 A Turborepo + pnpm workspace with multiple frontend apps and shared packages.
 
+## Dashboard Preview
+
+![Admin dashboard preview](artifacts/dashboard.png)
+
+![Login screen preview](artifacts/login.png)
+
 ## Tech Stack
 
 - Package manager: pnpm (required)
