@@ -13,7 +13,7 @@ import { useDashboardOrderPerformanceQuery } from '../hooks/useDashboardOrderPer
 const chartConfig = {
   qty: { label: 'Units sold' },
   online: { color: '#7c3aed', label: 'Online' },
-  cash: { color: '#14b8a6', label: 'Cash' },
+  cash: { color: '#10b981', label: 'Cash' },
 } satisfies ChartConfig;
 
 const chartColors = ['#7c3aed', '#14b8a6', '#ec4899', '#f59e0b', '#0ea5e9', '#84cc16'];
@@ -85,7 +85,7 @@ export default function DashboardOrderPerformanceChart() {
   }
 
   return (
-    <div className="w-full rounded-lg p-5 text-slate-950 sm:p-6">
+    <div className="mt-10 w-full rounded-lg text-slate-950">
       <div className="flex w-full flex-col gap-1">
         <div className="w-full">
           <p className="text-5xl font-semibold tracking-[-0.035em]">
