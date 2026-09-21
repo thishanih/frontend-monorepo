@@ -88,7 +88,7 @@ export default function DashboardOrderPerformanceChart() {
     <div className="mt-10 w-full rounded-lg text-slate-950">
       <div className="flex w-full flex-col gap-1">
         <div className="w-full">
-          <p className="text-5xl font-semibold tracking-[-0.035em]">
+          <p className="text-4xl font-semibold uppercase tracking-[-0.035em]">
             This month&apos;s product sales
           </p>
           <p className="mt-1 text-lg text-slate-500">

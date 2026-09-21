@@ -21,7 +21,7 @@ export default function Dashboard() {
       >
         <div
           aria-hidden="true"
-          className="StripeHomepageHeroGradient pointer-events-none absolute inset-0 h-full w-full"
+          className="StripeHomepageHeroGradient pointer-events-none absolute inset-0 h-full w-full rounded-lg"
         />
 
         <motion.div
@@ -53,7 +53,7 @@ export default function Dashboard() {
         initial={{ opacity: 0, y: 18 }}
         transition={{ delay: 0.22, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="">
+        <div className="mb-10">
           <DashboardOrderPerformanceChart />
         </div>
       </motion.div>
